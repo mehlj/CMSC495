@@ -27,7 +27,7 @@ FKProjectID INT NOT NULL,
 FKUserID INT NOT NULL,
 TaskName VARCHAR(200) NOT NULL,
 TaskDateCreated DATE NOT NULL,
-TaskDateEnded DATE NOT NULL,
+TaskDateEnded DATE,
 TaskPriority INT NOT NULL,
 TaskSummary VARCHAR(2000) NOT NULL,
 FOREIGN KEY (FKProjectID) references Projects(ProjectID),
@@ -53,3 +53,13 @@ VALUES (4, "Jason Willis", "Project Manager");
 
 INSERT INTO Users (UserID, Name, Role)
 VALUES (5, "David Thatcher", "Team Lead");
+
+INSERT INTO Projects(ProjectID, ProjectName, ProjectAssignedTo,
+ProjectDue, ProjectPriority, ProjectSummary)
+VALUES(1, "TestProject", "Jason Willis", "2018-05-06",1,
+	"This is a test project");
+
+INSERT INTO Tasks(TaskID, FKProjectID, FKUserID,
+TaskName, TaskDateCreated, TaskDateEnded, TaskPriority,
+TaskSummary)
+VALUES(1,1,2,"Develop SQL Script", "2018-03-19",NULL,1,"Build SQL script for DB");
