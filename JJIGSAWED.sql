@@ -1,4 +1,4 @@
--- Create local instance of the databse
+-- Create local instance of the database
 
 CREATE DATABASE CMSC495;
 
