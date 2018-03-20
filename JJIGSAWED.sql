@@ -71,7 +71,6 @@ VALUES (4, "Jason Willis", "Project Manager");
 INSERT INTO Users (UserID, Name, Role)
 VALUES (5, "David Thatcher", "Team Lead");
 
-<<<<<<< HEAD
 INSERT INTO Projects(ProjectID, ProjectName, ProjectAssignedTo,
 ProjectDue, ProjectPriority, ProjectSummary)
 VALUES(1, "TestProject", "Jason Willis", "2018-05-06",1,
@@ -81,7 +80,7 @@ INSERT INTO Tasks(TaskID, FKProjectID, FKUserID,
 TaskName, TaskDateCreated, TaskDateEnded, TaskPriority,
 TaskSummary)
 VALUES(1,1,2,"Develop SQL Script", "2018-03-19",NULL,1,"Build SQL script for DB");
-=======
+
 INSERT INTO Projects(ProjectID, ProjectName, ProjectAssignedTo, 
 ProjectDue, ProjectPriority, ProjectSummary)
 VALUES(1, "Test Project", "Jason Willis", "2018-05-06", 1, "Capstone project for CMSC495");
@@ -90,8 +89,11 @@ INSERT INTO Tasks(TaskID, FKProjectID, FKUserID, Taskname, TaskDateCreated, Task
 TaskPriority, TaskSummary)
 VALUES(1,1,2,"Build SQL Script", "2018-03-19", NULL,1,"Test task for sql script");
 
+<<<<<<< HEAD
 
 >>>>>>> f2d4057d03274b11b163194bc1f50b814330a073
 =======
 
 >>>>>>> 43741b328c0f15675714c4613894094058494fe3
+=======
+>>>>>>> patch-1
