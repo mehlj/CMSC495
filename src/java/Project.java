@@ -1,34 +1,33 @@
 
 import java.sql.*;
 
-
 /**
  *
- * @author jmehl & GLANE
+ * @author jmehl, glane
  */
 public class Project {
+  
+     private String projectName;
+     private int priority;
+     private String projectAssignedTo;
+     private int projectID;
+     private String projectSummary;
+     private String projectDueDate;
+     private String connect;
+     private Statement statement;
+     private PreparedStatement prepStatement;
+     private String driver;
+     private String user;
+     private String pword;
+     private Connection con;
+  
+     // Create Project and create record in project table
+     public void createProject(String projectName,
+             int priority, String projectAssignedTo,
+             int projectID, String projectSummary,
+             String projectDueDate) {
 
-    private String projectName;
-    private int priority;
-    private String projectAssignedTo;
-    private int projectID;
-    private String projectSummary;
-    private String projectDueDate;
-    private String connect;
-    private Statement statement;
-    private PreparedStatement prepStatement;
-    private String driver;
-    private String user;
-    private String pword;
-    private Connection con;
-    
-
-    // Create Project and create record in project table
-    public void createProject(String projectName,
-            int priority, String projectAssignedTo,
-            int projectID, String projectSummary,
-            String projectDueDate) {
-
+  
         this.projectName = projectName;
         this.priority = priority;
         this.projectAssignedTo = projectAssignedTo;
@@ -60,6 +59,6 @@ public class Project {
             System.out.println("An exception occured");
         }
 
-    } // end create project
+    } // end createProject()
 
-}
+} // end Project
