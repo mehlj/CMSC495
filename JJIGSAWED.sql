@@ -61,5 +61,3 @@ VALUES(1, "Test Project", "Jason Willis", "2018-05-06", 1, "Capstone project for
 INSERT INTO Tasks(TaskID, FKProjectID, FKUserID, Taskname, TaskDateCreated, TaskDateEnded, 
 TaskPriority, TaskSummary)
 VALUES(1,1,2,"Build SQL Script", "2018-03-19", NULL,1,"Test task for sql script");
-
-
