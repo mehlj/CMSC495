@@ -88,7 +88,7 @@ public class Project
              con = DriverManager.getConnection(connect,user,pword);
          
              prepStatement = con.prepareStatement("UPDATE Projects "
-                                                + "SET ProjectName = ?" // Replaced ? with column name, prepStatemnet.setString adds " " around column name
+                                                + "SET " + colToModify + " = ?" // Replaced ? with column name, prepStatemnet.setString adds " " around column name
                                                 + "WHERE projectID = ?");
 
            //  prepStatement.setString(1, colToModify);
@@ -122,7 +122,7 @@ public class Project
              con = DriverManager.getConnection(connect,user,pword);
          
              prepStatement = con.prepareStatement("UPDATE Projects "
-                                                + "SET ProjectPriority = ? " // Same as above method, setString adds " " to column name
+                                                + "SET " + colToModify + "= ? " // Same as above method, setString adds " " to column name
                                                 + "WHERE projectID = ?;");
 
              //prepStatement.setString(1, colToModify);
