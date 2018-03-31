@@ -15,7 +15,7 @@ CREATE TABLE Projects(
 ProjectID INT NOT NULL, 
 ProjectName VARCHAR(200) NOT NULL,
 ProjectAssignedTo VARCHAR(100) NOT NULL,
-ProjectDue DATE NOT NULL,
+ProjectDue VARCHAR(100) NOT NULL,
 ProjectPriority INT NOT NULL,
 ProjectSummary VARCHAR(2000) NOT NULL,
 PRIMARY KEY (ProjectID)

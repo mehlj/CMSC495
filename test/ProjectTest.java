@@ -160,5 +160,47 @@ public class ProjectTest
         System.out.println("An exception occurred");
       }
     }
+      @Test
+      public void testCreateProject() {
+                
+        System.out.println("* ProjectTest: CreateProject()");
+        String expectedValue = "Test Project Create Test";
+        String resultValue = "";
+        
+        // query string to later validate record has been updated
+        String query = "SELECT ProjectName FROM Projects "
+                     + "WHERE ProjectName = 'Test Project Create Test'";
+
+        // create new test record
+        Project instance = new Project("Test Project Create Test",
+             1, "GregTest", 122, "Testing CreateProject()",
+             "3/29/18");
+        
+        try 
+        {
+            Class.forName(driver);
+            Connection con = DriverManager.getConnection(connect,user,pword);
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            
+        while (rs.next()) 
+        {
+            resultValue = rs.getString("ProjectName");
+        }
+        //System.out.println("this is the result value" + resultValue);
+        
+        // ensure that result set is returning proper data
+        assertEquals(expectedValue, resultValue);
+        
+        // drop test record from table once test has completed
+        PreparedStatement prepStatement;
+        prepStatement = con.prepareStatement("DELETE FROM Projects "
+                                            + "WHERE projectID = 122");
+        prepStatement.execute();
+        
+    } catch (SQLException | ClassNotFoundException e ) {
+        System.out.println("An exception occurred");
+      }
+    }
    
 }

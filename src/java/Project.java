@@ -48,9 +48,11 @@ public class Project
          {
              Class.forName(driver);
              con = DriverManager.getConnection(connect,user,pword);
+             
+             
          
              prepStatement = con.prepareStatement("Insert into Projects values "
-                                                + "?,?,?,?,?,?");
+                                                + "(?,?,?,?,?,?);");
              prepStatement.setInt(1, projectID);
              prepStatement.setString(2, projectName);
              prepStatement.setString(3, projectAssignedTo);
@@ -59,11 +61,14 @@ public class Project
              prepStatement.setString(6, projectSummary);
          
              prepStatement.execute(); // perform insert
+             
+             con.close();
          } 
          catch (ClassNotFoundException | SQLException ex) 
          {
-            System.out.println("An exception occured");
+            System.out.println("An exception occurred");
          }
+         
     } // end constructor
      
      /**
@@ -83,18 +88,20 @@ public class Project
              con = DriverManager.getConnection(connect,user,pword);
          
              prepStatement = con.prepareStatement("UPDATE Projects "
-                                                + "SET ? = ?"
+                                                + "SET " + colToModify + " = ?" // Replaced ? with column name, prepStatemnet.setString adds " " around column name
                                                 + "WHERE projectID = ?");
 
-             prepStatement.setString(1, colToModify);
-             prepStatement.setString(2, newValue);
-             prepStatement.setInt(3, projectID);
+           //  prepStatement.setString(1, colToModify);
+             prepStatement.setString(1, newValue);
+             prepStatement.setInt(2, projectID);
          
              prepStatement.execute(); // perform update
+             
+             con.close();
          } 
          catch (ClassNotFoundException | SQLException ex) 
          {
-            System.out.println("An exception occured");
+            System.out.println("An exception occurred");
          }
     } // end modifyProjectString()
      
@@ -115,18 +122,20 @@ public class Project
              con = DriverManager.getConnection(connect,user,pword);
          
              prepStatement = con.prepareStatement("UPDATE Projects "
-                                                + "SET ? = ?"
-                                                + "WHERE projectID = ?");
+                                                + "SET " + colToModify + "= ? " // Same as above method, setString adds " " to column name
+                                                + "WHERE projectID = ?;");
 
-             prepStatement.setString(1, colToModify);
-             prepStatement.setInt(2, newValue);
-             prepStatement.setInt(3, projectID);
+             //prepStatement.setString(1, colToModify);
+             prepStatement.setInt(1, newValue);
+             prepStatement.setInt(2, projectID);
          
              prepStatement.execute(); // perform update
+             
+             con.close();
          } 
          catch (ClassNotFoundException | SQLException ex) 
          {
-            System.out.println("An exception occured");
+            System.out.println("An exception occurred");
          }
     } // end modifyProjectInt()
      
@@ -154,6 +163,8 @@ public class Project
              prepStatement.setInt(2, projectID);
          
              rs = prepStatement.executeQuery(); // perform update
+             
+             con.close();
          } 
          catch (ClassNotFoundException | SQLException ex) 
          {
