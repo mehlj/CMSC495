@@ -162,7 +162,7 @@ public class TaskTest
       }
     }
       @Test
-      public void testCreateProject() {
+      public void testCreateTask() {
                 
         System.out.println("* TaskTest: CreateTask()");
         String expectedValue = "Task Task Create Task";
