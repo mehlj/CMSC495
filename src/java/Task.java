@@ -2,6 +2,7 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -123,7 +124,7 @@ public class Task {
      * @param tasktID - unique ID tracking project
      */
      public void modifyTaskInt(String colToModify, int newValue, 
-                               int taskID) 
+                               int taskID, int projectID) 
      {
          
          try
@@ -132,12 +133,15 @@ public class Task {
              con = DriverManager.getConnection(connect,user,pword);
          
              prepStatement = con.prepareStatement("UPDATE Tasks "
-                                                + "SET " + colToModify + "= ? " // Same as above method, setString adds " " to column name
-                                                + "WHERE taskID = ?;");
+                                                + "SET " + colToModify + " = ? " 
+                                                + "WHERE FKProjectID = ? AND TaskID = ?;");
 
              
              prepStatement.setInt(1, newValue);
-             prepStatement.setInt(2, taskID);
+             prepStatement.setInt(2, projectID);
+             prepStatement.setInt(3, taskID);
+             
+            // System.out.println(prepStatement.toString());
          
              prepStatement.execute(); // perform update
              
@@ -148,6 +152,34 @@ public class Task {
             System.out.println("An exception occurred");
          }
     } // end modifyTaskInt()
+     
+      public ResultSet loadTasks(int projectID) 
+     {
+         ResultSet rs = null;
+         
+         try
+         {        
+             Class.forName(driver);
+             con = DriverManager.getConnection(connect,user,pword);
+         
+             prepStatement = con.prepareStatement("SELECT TaskName, TaskSummary, TaskPriority, TaskDateCreated, TaskDateEnded"
+                                                + "FROM Tasks"
+                                                + "WHERE projectID = ?");
+
+             //prepStatement.setString(1, projectName);
+             prepStatement.setInt(1, projectID);
+         
+             rs = prepStatement.executeQuery(); // perform update
+             
+             con.close();
+         } 
+         catch (ClassNotFoundException | SQLException ex) 
+         {
+            System.out.println("An exception occured");
+         }
+         
+         return rs;
+    } // end loadTask()
 }
 
 
