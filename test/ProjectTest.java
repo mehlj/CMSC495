@@ -21,6 +21,7 @@ public class ProjectTest
     
     /**
      * Test of modifyProjectString method, of class Project.
+     * @author jmehl
      */
     @Test
     public void testModifyProjectString() 
@@ -68,6 +69,7 @@ public class ProjectTest
 
     /**
      * Test of modifyProjectInt method, of class Project.
+     * @author jmehl
      */
     @Test
     public void testModifyProjectInt() 
@@ -116,6 +118,7 @@ public class ProjectTest
 
     /**
      * Test of loadProject method, of class Project.
+     * @author jmehl
      */
     @Test
     public void testLoadProject() {
@@ -160,6 +163,11 @@ public class ProjectTest
         System.out.println("An exception occurred");
       }
     }
+      
+      /**
+      * Test of Task constructor.
+      * @author jmehl
+      */
       @Test
       public void testCreateProject() {
                 

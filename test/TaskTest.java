@@ -21,6 +21,7 @@ public class TaskTest
     
     /**
      * Test of modifyProjectString method, of class Test.
+     * @author glane
      */
     @Test
     public void testModifyTaskString() 
@@ -68,6 +69,7 @@ public class TaskTest
 
     /**
      * Test of modifyTasktInt method, of class Test.
+     * @author glane
      */
     @Test
     public void testModifyTestInt() 
@@ -116,7 +118,8 @@ public class TaskTest
     }
 
     /**
-     * Test of loadProject method, of class Project.
+     * Test of loadTask method, of class Task.
+     * @author glane
      */
     @Test
     public void testLoadTask() {
@@ -161,6 +164,10 @@ public class TaskTest
         System.out.println("An exception occurred");
       }
     }
+     /**
+     * Test of createTask method, of class Task.
+     * @author glane
+     */
       @Test
       public void testCreateTask() {
                 

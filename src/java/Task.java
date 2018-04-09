@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 /**
  *
- * @author jmehl
+ * @author jmehl, glane
  */
 public class Task {
     
@@ -30,7 +30,7 @@ public class Task {
     private Connection con;
     
     
-        /**
+     /**
      *
      * Create Task and create record in task table
      * @param taskName - short name of task
@@ -41,6 +41,7 @@ public class Task {
      * @param taskSummary - string describing task in more detail
      * @param taskDateCreated - date when task was created
      * @param taskDateEnded - date task is due
+     * @author glane
      */
     
     public Task(String taskName, 
@@ -89,6 +90,13 @@ public class Task {
         
     } // end constructor
     
+     /**
+     * Modify string record in Task table
+     * @param colToModify - short name of project goal
+     * @param newValue - integer value to update in table
+     * @param taskID - unique ID tracking task
+     * @author glane
+     */
     public void modifyTaskString(String colToModify, String newValue, 
                                int taskID) 
      {
@@ -117,11 +125,13 @@ public class Task {
     } // end modifyTaskString()
     
     
-       /*
+    /**
      * Modify integer record in Project table
      * @param colToModify - short name of project goal
      * @param newValue - integer value to update in table
-     * @param tasktID - unique ID tracking project
+     * @param taskID - unique ID tracking task
+     * @param projectID - unique ID tracking project
+     * @author glane
      */
      public void modifyTaskInt(String colToModify, int newValue, 
                                int taskID, int projectID) 
@@ -153,6 +163,14 @@ public class Task {
          }
     } // end modifyTaskInt()
      
+     
+     /**
+     *
+     * Search for project and return result set of SQL query
+     * @param projectID - unique ID tracking project
+     * @return result set of select query
+     * @author glane
+     */
       public ResultSet loadTasks(int projectID) 
      {
          ResultSet rs = null;

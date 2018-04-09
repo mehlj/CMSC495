@@ -31,6 +31,7 @@ public class Project
      * @param projectID - unique ID tracking project
      * @param projectSummary - string describing project in more detail
      * @param projectDueDate - date when project needs to be completed
+     * @author glane
      */
      public Project(String projectName,
              int priority, String projectAssignedTo,
@@ -77,6 +78,7 @@ public class Project
      * @param colToModify - short name of project goal
      * @param newValue - string value to update in table
      * @param projectID - unique ID tracking project
+     * @author jmehl
      */
      public void modifyProjectString(String colToModify, String newValue, 
                                int projectID) 
@@ -111,6 +113,7 @@ public class Project
      * @param colToModify - short name of project goal
      * @param newValue - integer value to update in table
      * @param projectID - unique ID tracking project
+     * @author jmehl
      */
      public void modifyProjectInt(String colToModify, int newValue, 
                                int projectID) 
@@ -145,6 +148,7 @@ public class Project
      * @param projectName - short name of project goal
      * @param projectID - unique ID tracking project
      * @return result set of select query
+     * @author jmehl
      */
      public ResultSet loadProject(String projectName, int projectID) 
      {
