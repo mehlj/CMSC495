@@ -9,13 +9,13 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>JJIGSAWED Task Tracking Software</title>
-        <link rel= "stylesheet" href="style.css">
+        <link rel= "stylesheet" href="./style.css">
     </head>
     <body>
         <header>
             <div class="container">
                 <div id="software_name">
-                    <h1>JJIGSAWED Task Tracking Software - Home Page</h1>
+                    <h1>User Setup</h1>
                 </div>
                 <nav>
                     <ul>
@@ -27,23 +27,23 @@ and open the template in the editor.
                 </nav>
             </div>
         </header>
-        <div>
-        </div>       
-        <section id="boxes">
-            <div class="container">
-                <div class="box">
-                    <!--<img src="./img/projectsIcon.png">-->
-                    <h3>Projects</h3>
-                </div>
-                <div class="box">
-                    <h3></h3>
-                </div>
-                <div class="box">
-                    <!--<img src="./img/user-settings-icon.png">-->
-                    <h3>User Setup</h3>
-                </div>
-            </div>
-        </section>
+                
+        <form>
+            <fieldset>
+                <legend>User Information:</legend>
+                *User Name: <input type="text" name="user_name">
+                *Name: <input type="text" name ="first_last_name">
+
+                Role: <select name="user_role">   
+                    <option disabled selected value> -- select an option -- </option>
+                    <option value="project_manager">Project Manager</option>
+                    <option value="developer">Developer</option>
+                    <option value="admin">Administrator</option>
+                </select><br><br>
+            </fieldset>
+            <input type="submit" value="Search">
+            <input type="submit" value="Add Task">
+        </form>
         <footer>
             <p>
                 JJIGSAWED Software Company, Copyright 2018.

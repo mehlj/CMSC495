@@ -1,5 +1,8 @@
+package JJIGSAWED;
+
 
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -7,10 +10,10 @@ import java.sql.*;
  */
 public class Project
 {
-    private final String driver = "com.mysql.jdbc.Driver";
-    private final String connect = "jdbc:mysql://localhost:3306/CMSC495";
-    private final String user = "root"; // Change this to mysql username
-    private final String pword = "root"; // change this to mysql password
+    private static final String DRIVER = "com.mysql.jdbc.Driver";
+    private static final String CONNECT = "jdbc:mysql://localhost:3306/CMSC495";
+    private static final String USER = "root"; // Change this to mysql USERname
+    private static final String PWORD = "root"; // change this to mysql password
 
     private String projectName;
     private int priority;
@@ -18,9 +21,9 @@ public class Project
     private int projectID;
     private String projectSummary;
     private String projectDueDate;
-    private Statement statement;
-    private PreparedStatement prepStatement;
-    private Connection con;
+    private static Statement statement;
+    private static PreparedStatement prepStatement;
+    private static Connection con;
   
     /**
      *
@@ -47,8 +50,8 @@ public class Project
          
          try
          {
-             Class.forName(driver);
-             con = DriverManager.getConnection(connect,user,pword);
+             Class.forName(DRIVER);
+             con = DriverManager.getConnection(CONNECT,USER,PWORD);
              
              
          
@@ -68,6 +71,7 @@ public class Project
          catch (ClassNotFoundException | SQLException ex) 
          {
             System.out.println("An exception occurred");
+            System.out.println(ex);
          }
          
     } // end constructor
@@ -86,8 +90,8 @@ public class Project
          
          try
          {        
-             Class.forName(driver);
-             con = DriverManager.getConnection(connect,user,pword);
+             Class.forName(DRIVER);
+             con = DriverManager.getConnection(CONNECT,USER,PWORD);
          
              prepStatement = con.prepareStatement("UPDATE Projects "
                                                 + "SET " + colToModify + " = ?" // Replaced ? with column name, prepStatemnet.setString adds " " around column name
@@ -104,6 +108,7 @@ public class Project
          catch (ClassNotFoundException | SQLException ex) 
          {
             System.out.println("An exception occurred");
+            System.out.println(ex);
          }
     } // end modifyProjectString()
      
@@ -121,8 +126,8 @@ public class Project
          
          try
          {        
-             Class.forName(driver);
-             con = DriverManager.getConnection(connect,user,pword);
+             Class.forName(DRIVER);
+             con = DriverManager.getConnection(CONNECT,USER,PWORD);
          
              prepStatement = con.prepareStatement("UPDATE Projects "
                                                 + "SET " + colToModify + "= ? " // Same as above method, setString adds " " to column name
@@ -139,43 +144,104 @@ public class Project
          catch (ClassNotFoundException | SQLException ex) 
          {
             System.out.println("An exception occurred");
+            System.out.println(ex);
          }
     } // end modifyProjectInt()
      
      /**
      *
      * Search for project and return result set of SQL query
-     * @param projectName - short name of project goal
      * @param projectID - unique ID tracking project
      * @return result set of select query
      * @author jmehl
      */
-     public ResultSet loadProject(String projectName, int projectID) 
+     public static ResultSet loadProject(int projectID) 
      {
          ResultSet rs = null;
          
          try
          {        
-             Class.forName(driver);
-             con = DriverManager.getConnection(connect,user,pword);
+             Class.forName(DRIVER);
+             con = DriverManager.getConnection(CONNECT,USER,PWORD);
          
-             prepStatement = con.prepareStatement("SELECT projectID"
-                                                + "FROM Projects"
+             prepStatement = con.prepareStatement("SELECT * "
+                                                + "FROM CMSC495.Projects "
                                                 + "WHERE projectID = ?");
-
-             prepStatement.setString(1, projectName);
-             prepStatement.setInt(2, projectID);
+             
+             prepStatement.setInt(1, projectID);
          
              rs = prepStatement.executeQuery(); // perform update
              
-             con.close();
          } 
          catch (ClassNotFoundException | SQLException ex) 
          {
             System.out.println("An exception occured");
+            System.out.println(ex);
          }
          
          return rs;
     } // end loadProject()
+     
+     /**
+     *
+     * Search for project and return 
+     * @return result set of select query
+     * @author jmehl
+     */
+     public static ArrayList getProjectIDs() 
+     {
+         
+         ArrayList<Integer> projectIDList = new ArrayList<Integer>();
+         
+         try
+         {        
+             Class.forName(DRIVER);
+             con = DriverManager.getConnection(CONNECT,USER,PWORD);
+         
+             prepStatement = con.prepareStatement("SELECT * "
+                                                + "FROM CMSC495.Projects");
+         
+             ResultSet rs = prepStatement.executeQuery(); // perform update
+             
+             // convert resultset to array
+             while (rs.next()) 
+             {
+                int i = rs.getInt(1);
+                
+                projectIDList.add(i);
+             }
+         
+             con.close();    
+             rs.close();
+         }
+         catch (ClassNotFoundException | SQLException ex) 
+         {
+            System.out.println("An exception occured");
+            System.out.println(ex);
+         }
+         
+         return projectIDList;
+    } // end loadProject()
 
+     
+public static void main(String [ ] args) throws SQLException
+{
+    ArrayList<Integer> list = Project.getProjectIDs();
+    
+    for (int i = 0; i < list.size(); i++) 
+    {
+        System.out.println(list.get(i));
+        ResultSet rs = Project.loadProject(list.get(i));
+        
+        while (rs.next())
+        {
+            System.out.println(rs.getString("ProjectName"));
+        }
+    }
+                       
+}
+
+     
+     
 } // end Project class
+
