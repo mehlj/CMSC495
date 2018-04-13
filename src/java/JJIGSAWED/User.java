@@ -1,9 +1,12 @@
+package JJIGSAWED;
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Random;
 
 /**
  *
@@ -31,9 +34,12 @@ public class User {
      * @author glane
      */
 
-    public User(String userName, String userRole) {
+    public void createUser(String userName, String userRole) {
         this.userName = userName;
         this.userRole = userRole;
+        
+        Random rand = new Random();
+        int userID = 0 + rand.nextInt(500);
         
         try
          {
@@ -42,10 +48,11 @@ public class User {
              
              
          
-             prepStatement = con.prepareStatement("Insert into Users values "
-                                                + "(?,?);");
-             prepStatement.setString(1, userName);
-             prepStatement.setString(2, userRole);
+             prepStatement = con.prepareStatement("Insert into Users(userID,Name,Role) values "
+                                                + "(?,?,?);");
+             prepStatement.setInt(1, userID);
+             prepStatement.setString(2, userName);
+             prepStatement.setString(3, userRole);
              
          
              prepStatement.execute(); // perform insert
@@ -54,7 +61,8 @@ public class User {
          } 
          catch (ClassNotFoundException | SQLException ex) 
          {
-            System.out.println("An exception occurred");
+           // System.out.println("An exception occurred");
+             System.out.println(ex.getMessage());
          }
 
     }
