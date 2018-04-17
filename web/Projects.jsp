@@ -67,6 +67,7 @@
                   <th>Due</th>
                   <th>Priority</th>
                   <th>Summary</th>
+                  <th>Remove</th>
                 </tr>
                 <%
                    ArrayList<Integer> list = Project.getProjectIDs();
@@ -85,6 +86,11 @@
                 <td><%= rs.getString("ProjectDue") %></td>
                 <td><%= rs.getInt("ProjectPriority") %></td>
                 <td><%= rs.getString("ProjectSummary") %></td>
+                <td>
+                    <a href="ProjectRemove?ProjectName=<%= rs.getString("ProjectName") %>">
+                    <button>Remove Project</button>
+                    </a>
+                </td>
                 </tr>
                 <%
 
