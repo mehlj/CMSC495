@@ -34,10 +34,10 @@ public class ProjectServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        if (request.getParameter("project_name") != null
-         && request.getParameter("project_summary") != null
-         && request.getParameter("due_date") != null
-         && request.getParameter("project_priority") != null) 
+        if (!"".equals(request.getParameter("project_name"))
+         && !"".equals(request.getParameter("project_summary"))
+         && !"".equals(request.getParameter("due_date"))
+         && !"".equals(request.getParameter("project_priority"))) 
         {
             // generate project ID
             Random rand = new Random();
@@ -52,37 +52,18 @@ public class ProjectServlet extends HttpServlet {
                     projectID,
                     request.getParameter("project_summary"),
                     request.getParameter("due_date"));
+                    try
+                    {
+                        response.sendRedirect("ProjectsSuccess.jsp");
+                    }
+                    catch (IOException ex)
+                    {
+                        response.sendRedirect("ProjectsFail.jsp");
+                    }
         }
         else
         {
-            try (PrintWriter out = response.getWriter())
-            {
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>ProjectServlet Error</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Missing Arguments</h1>");
-            out.println("</body>");
-            out.println("</html>");
-            }
-        }
-        
-        try (PrintWriter out = response.getWriter())
-        {
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Project Creation Complete</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Success</h1>");
-            out.println("Project successfully created.");
-            out.println("Return to the Projects page: ");
-            out.println("<a href=Projects.jsp>Return to Projects</a>");
-            out.println("</body>");
-            out.println("</html>");
+            response.sendRedirect("ProjectsFail.jsp");
         }
         
     }

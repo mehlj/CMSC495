@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Projects
-    Created on : Apr 11, 2018, 11:24:20 PM
+    Document   : ProjectsFail
+    Created on : Apr 16, 2018, 11:24:20 PM
     Author     : jmehl
 --%>
 
@@ -26,6 +26,7 @@
             <div class="container">
                 <div id="software_name">
                     <h1>Project Management</h1>
+                    <h2><p style="color:red;">ERROR - Missing Arguments</p></h2>
                 </div>
                 <nav>
                     <ul>
