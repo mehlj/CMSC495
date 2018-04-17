@@ -200,6 +200,35 @@ public class Task {
          
          return rs;
     } // end loadTask()
+      
+      /**
+     *
+     * Search for task and return result set of SQL query
+     * @param taskID - unique ID tracking task
+     * @author glane
+     */
+      
+      public void deleteTask(int taskID){
+          try
+         {        
+             Class.forName(driver);
+             con = DriverManager.getConnection(connect,user,pword);
+         
+             prepStatement = con.prepareStatement("DELETE FROM Tasks WHERE TaskID = ?;");
+
+             //prepStatement.setString(1, projectName);
+             prepStatement.setInt(1, taskID);
+             
+             prepStatement.execute(); // Perform delete
+             
+             con.close();
+         } 
+         catch (ClassNotFoundException | SQLException ex) 
+         {
+            System.out.println(ex.getMessage());
+         }
+          
+      } // deleteTask
 }
 
 

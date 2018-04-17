@@ -222,6 +222,36 @@ public class Project
          
          return projectIDList;
     } // end loadProject()
+     
+     /**
+     *
+     * Search for project and delete from database
+     * @param projectID - unique ID tracking project
+     * @author glane
+     */
+     
+     public void deleteProject(int projectID){
+         try
+         {        
+             Class.forName(DRIVER);
+             con = DriverManager.getConnection(CONNECT,USER,PWORD);
+         
+             prepStatement = con.prepareStatement("DELETE FROM Projects "
+                                                + "WHERE projectID = ?;");
+
+             prepStatement.setInt(1, projectID);
+         
+             prepStatement.execute(); // perform delete
+             
+             con.close();
+         } 
+         catch (ClassNotFoundException | SQLException ex) 
+         {
+            System.out.println("An exception occurred");
+           // System.out.println(ex);
+         }
+         
+     } // end deleteProject();
 
      
 public static void main(String [ ] args) throws SQLException

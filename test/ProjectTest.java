@@ -211,5 +211,39 @@ public class ProjectTest
         System.out.println("An exception occurred");
       }
     }
+      @Test
+      public void testDeleteProject(){
+          System.out.println("testDeleteProject");
+          // create new test record
+        Project instance = new Project("Test Project 3",
+             5, "Testers", 36, "Testing loadProject()",
+             "3/29/18");
+        String projectName = "";
+        String resultValue = "";
+        
+        instance.deleteProject(36);
+        
+        String query = "SELECT ProjectName FROM Projects where ProjectID = 36";
+        
+        try 
+        {
+            Class.forName(driver);
+            Connection con = DriverManager.getConnection(connect,user,pword);
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            
+        while (rs.next()) 
+        {
+            resultValue = rs.getString("ProjectName");
+        }
+        
+        assertEquals(resultValue,projectName);
+        
+          
+      }
+         catch (SQLException | ClassNotFoundException e ) {
+        System.out.println("An exception occurred");
+      }
    
+}
 }
