@@ -17,7 +17,7 @@ public class User {
     private final String driver = "com.mysql.jdbc.Driver";
     private final String connect = "jdbc:mysql://localhost:3306/CMSC495";
     private final String user = "root"; // Change this to mysql username
-    private final String pword = "root"; // change this to mysql password
+    private final String pword = "Gregory123"; // change this to mysql password
 
     private String userName;
     private String userRole;
@@ -66,6 +66,14 @@ public class User {
          }
 
     }
+    /**
+     *
+     * modify record in User table
+     * @param colToModify - Column to modify
+     * @param newValue - new value of column
+     * @param userID - unique ID of user column
+     * @author glane
+     */
     
          public void modifyUserString(String colToModify, String newValue, 
                                int userID) 
@@ -80,7 +88,6 @@ public class User {
                                                 + "SET " + colToModify + " = ?" // Replaced ? with column name, prepStatemnet.setString adds " " around column name
                                                 + "WHERE userID = ?");
 
-           //  prepStatement.setString(1, colToModify);
              prepStatement.setString(1, newValue);
              prepStatement.setInt(2, userID);
          
@@ -92,7 +99,34 @@ public class User {
          {
             System.out.println("An exception occurred");
          }
+     }
+         /**
+     *
+     * delete record in User table
+     * @param userID - unique ID of user column
+     * @author glane
+     */
+         public void deleteUser(int userID){
+             try
+         {        
+             Class.forName(driver);
+             con = DriverManager.getConnection(connect,user,pword);
+         
+             prepStatement = con.prepareStatement("DELETE FROM Users WHERE userID = ?");
+             
+             prepStatement.setInt(1, userID);
+         
+             prepStatement.execute(); // perform delete
+             
+             con.close();
+         } 
+         catch (ClassNotFoundException | SQLException ex) 
+         {
+            System.out.println(ex.getMessage());
+         }
+             
+         } // end delete user
     } 
      
 
-}
+
