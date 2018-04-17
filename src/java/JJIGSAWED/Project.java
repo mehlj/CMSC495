@@ -230,7 +230,9 @@ public class Project
      * @author glane
      */
      
+     
      public static void deleteProject(int projectID){
+
          try
          {        
              Class.forName(DRIVER);
@@ -252,6 +254,24 @@ public class Project
          }
          
      } // end deleteProject();
+
+     
+public static void main(String [ ] args) throws SQLException
+{
+    ArrayList<Integer> list = Project.getProjectIDs();
+    
+    for (int i = 0; i < list.size(); i++) 
+    {
+        System.out.println(list.get(i));
+        ResultSet rs = Project.loadProject(list.get(i));
+        
+        while (rs.next())
+        {
+            System.out.println(rs.getString("ProjectName"));
+        }
+    }
+                       
+}
      
      
 } // end Project class
