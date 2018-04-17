@@ -17,7 +17,7 @@ public class User {
     private final String driver = "com.mysql.jdbc.Driver";
     private final String connect = "jdbc:mysql://localhost:3306/CMSC495";
     private final String user = "root"; // Change this to mysql username
-    private final String pword = "Gregory123"; // change this to mysql password
+    private final String pword = "root"; // change this to mysql password
 
     private String userName;
     private String userRole;
