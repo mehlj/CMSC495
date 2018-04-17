@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>JJIGSAWED Task Tracking Software</title>
+        <link rel= "stylesheet" href="./style.css">
+    </head>
+    <body>
+        <header>
+            <div class="container">
+                <div id="software_name">
+                    <h1>Task Management</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="Projects.jsp">Projects</a></li>
+                        <li><a href="Tasks.html">Tasks</a></li>
+                        <li><a href="UserSetup.html">User Setup</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <form>
+            <fieldset>
+                <legend>Task Information:</legend>
+                *Task Name: <input type ="text" name="task_name">
+                *Task Summary: <textarea name ="task_summary" 
+                                         rows="10" cols="30"></textarea><br>
+                Date Created: <input type="date" name="date_created"> <br>
+                Date Ended: <input type="date" name="date_ended"> <br>
+
+                Priority: <select name="task_priority"> 
+                    <option value="3">Low</option>
+                    <option value="2">Normal</option>
+                    <option value="1">High</option>
+                </select><br>        
+
+                Schedule Filter: <select name="schedule_filter"> 
+                    <option value="0">All</option>
+                    <option value="7">7 Days</option>
+                    <option value="14">14 Days</option>
+                    <option value="30">30 Days</option>
+                </select><br><br>
+            </fieldset>
+            <input type="submit" value="Search">
+            <input type="submit" value="Add Task">
+        </form>
+        <section id="table">
+            <div class="container">
+                <table border ="1">
+                    <tr>
+                        <td>Task Name</td>
+                        <td>Date</td>
+                        <td>Priority</td>
+                        <td>Task</td>  
+                        <td>Project</td>  
+                    </tr>
+
+
+                </table>
+
+            </div>
+        </section>
+
+        <footer>
+            <p>
+                JJIGSAWED Software Company, Copyright 2018.
+            </p>
+        </footer>
+    </body>
+</html>

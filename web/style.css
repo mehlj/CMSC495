@@ -1,0 +1,108 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar 15, 2018, 6:42:10 PM
+    Author     : Dave
+*/
+body{
+
+    font:15px/1.5 Arial, Helvetica, sans-serif;
+    padding: 0;
+    margin: 0;
+    background-color:  grey;
+}
+
+.container{
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+ul{
+    margin: 0;
+    padding: 0;    
+}
+header{
+    background: #35424a;
+    color: #ffffff;
+    padding-top: 30px;
+    min-height: 70px;
+    border-bottom:orangered 3px solid;
+}
+
+header a{
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+header li{
+    float: left;
+    display: inline;
+    padding: 0 20px 0 20px;
+}
+
+/*Positiong of links in the header */
+header #software_name{
+    float: left; 
+}
+
+header #software_name h1{
+    margin: 0;
+}
+
+header nav{
+    float: right;
+    margin-top: 10px;
+}
+
+/*boxes is the area for the middle links and images for Project and User setup */
+#boxes{
+    margin-top: 20px;
+}
+
+#boxes .box{
+    float: left;
+    text-align: center;
+    width: 30%;
+    padding: 0px;
+}
+
+/*css for project and user images*/
+#boxes .box img{
+
+}
+ul{
+    border: 1px solid #555;
+}
+ul li{
+    display: block;
+    width: 60px;
+    color: aqua;
+    text-align: center;
+    border-bottom: 1px solid #555;
+}
+
+ul li a{
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+li:last-child{
+    border-bottom: none;
+}
+
+/*Formatting for bottom footer and Copyright */
+footer{
+    padding: 20px;
+    margin-top: 20px;
+    color: #ffffff;
+    background-color: orangered;
+    text-align: center;
+}
