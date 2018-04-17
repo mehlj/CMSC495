@@ -230,14 +230,16 @@ public class Project
      * @author glane
      */
      
-     public void deleteProject(int projectID){
+     
+     public static void deleteProject(int projectID){
+
          try
          {        
              Class.forName(DRIVER);
              con = DriverManager.getConnection(CONNECT,USER,PWORD);
          
              prepStatement = con.prepareStatement("DELETE FROM Projects "
-                                                + "WHERE projectID = ?;");
+                                                + "WHERE ProjectID = ?;");
 
              prepStatement.setInt(1, projectID);
          
@@ -270,7 +272,6 @@ public static void main(String [ ] args) throws SQLException
     }
                        
 }
-
      
      
 } // end Project class

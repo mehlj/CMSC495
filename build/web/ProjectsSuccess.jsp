@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Projects
-    Created on : Apr 11, 2018, 11:24:20 PM
+    Document   : ProjectsSuccess
+    Created on : Apr 16, 2018, 11:24:20 PM
     Author     : jmehl
 --%>
 
@@ -26,11 +26,11 @@
             <div class="container">
                 <div id="software_name">
                     <h1>Project Management</h1>
+                    <h2><p style="color:green;">OPERATION SUCCESS</p></h2>
                 </div>
                 <nav>
                     <ul>
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="Projects.jsp">Projects</a></li>
                         <li><a href="Projects.html">Projects</a></li>
                         <li><a href="Tasks.html">Tasks</a></li>
                         <li><a href="UserSetup.html">User Setup</a></li>
