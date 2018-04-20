@@ -31,9 +31,8 @@
                 <nav>
                     <ul>
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="Projects.html">Projects</a></li>
-                        <li><a href="Tasks.html">Tasks</a></li>
-                        <li><a href="UserSetup.html">User Setup</a></li>
+                        <li><a href="Projects.jsp">Projects</a></li>
+                        <li><a href="UserSetup.jsp">User Setup</a></li>
                     </ul>
                 </nav>
             </div>

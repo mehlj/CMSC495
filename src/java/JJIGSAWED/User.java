@@ -17,8 +17,8 @@ public class User {
 
     private final static String driver = "com.mysql.jdbc.Driver";
     private final static String connect = "jdbc:mysql://localhost:3306/CMSC495";
-    private final static String user = "root"; // Change this to mysql username
-    private final static String pword = "root"; // change this to mysql password
+    private static final String USER = DBInteraction.getDBUsername(); 
+    private static final String PWORD = DBInteraction.getDBPassword(); 
 
     private String userName;
     private String userRole;
@@ -43,7 +43,7 @@ public class User {
 
         try {
             Class.forName(driver);
-            con = DriverManager.getConnection(connect, user, pword);
+            con = DriverManager.getConnection(connect, USER, PWORD);
 
             prepStatement = con.prepareStatement("Insert into Users(userID,Name,Role) values "
                     + "(?,?,?);");
@@ -76,7 +76,7 @@ public class User {
 
         try {
             Class.forName(driver);
-            con = DriverManager.getConnection(connect, user, pword);
+            con = DriverManager.getConnection(connect, USER, PWORD);
 
             prepStatement = con.prepareStatement("UPDATE Users "
                     + "SET " + colToModify + " = ?" // Replaced ? with column name, prepStatemnet.setString adds " " around column name
@@ -103,7 +103,7 @@ public class User {
     public static void deleteUser(int userID) {
         try {
             Class.forName(driver);
-            con = DriverManager.getConnection(connect, user, pword);
+            con = DriverManager.getConnection(connect, USER, PWORD);
 
             prepStatement = con.prepareStatement("DELETE FROM Users WHERE userID = ?");
 
@@ -124,7 +124,7 @@ public class User {
 
         try {
             Class.forName(driver);
-            con = DriverManager.getConnection(connect, user, pword);
+            con = DriverManager.getConnection(connect, USER, PWORD);
 
             prepStatement = con.prepareStatement("SELECT * "
                     + "FROM CMSC495.Users");
@@ -154,7 +154,7 @@ public class User {
          try
          {        
              Class.forName(driver);
-             con = DriverManager.getConnection(connect,user,pword);
+             con = DriverManager.getConnection(connect,USER,PWORD);
          
              prepStatement = con.prepareStatement("SELECT * "
                                                 + "FROM CMSC495.Users "

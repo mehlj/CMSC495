@@ -1,4 +1,5 @@
 
+import JJIGSAWED.DBInteraction;
 import JJIGSAWED.Project;
 import java.sql.ResultSet;
 import org.junit.Test;
@@ -14,8 +15,8 @@ public class ProjectTest
      
     private final String driver = "com.mysql.jdbc.Driver";
     private final String connect = "jdbc:mysql://localhost:3306/CMSC495";
-    private final String user = "root"; // Change this to mysql username
-    private final String pword = "root"; // change this to mysql password    
+    private static final String USER = DBInteraction.getDBUsername(); 
+    private static final String PWORD = DBInteraction.getDBPassword(); 
 
     public ProjectTest() {
     }
@@ -45,7 +46,7 @@ public class ProjectTest
         try 
         {
             Class.forName(driver);
-            Connection con = DriverManager.getConnection(connect,user,pword);
+            Connection con = DriverManager.getConnection(connect,USER,PWORD);
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             
@@ -94,7 +95,7 @@ public class ProjectTest
         try 
         {
             Class.forName(driver);
-            Connection con = DriverManager.getConnection(connect,user,pword);
+            Connection con = DriverManager.getConnection(connect,USER,PWORD);
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             
@@ -142,7 +143,7 @@ public class ProjectTest
         try 
         {
             Class.forName(driver);
-            Connection con = DriverManager.getConnection(connect,user,pword);
+            Connection con = DriverManager.getConnection(connect,USER,PWORD);
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             
@@ -188,7 +189,7 @@ public class ProjectTest
         try 
         {
             Class.forName(driver);
-            Connection con = DriverManager.getConnection(connect,user,pword);
+            Connection con = DriverManager.getConnection(connect,USER,PWORD);
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             
@@ -228,7 +229,7 @@ public class ProjectTest
         try 
         {
             Class.forName(driver);
-            Connection con = DriverManager.getConnection(connect,user,pword);
+            Connection con = DriverManager.getConnection(connect,USER,PWORD);
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             

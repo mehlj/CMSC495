@@ -1,6 +1,5 @@
 package JJIGSAWED;
 
-
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -12,9 +11,12 @@ public class Project
 {
     private static final String DRIVER = "com.mysql.jdbc.Driver";
     private static final String CONNECT = "jdbc:mysql://localhost:3306/CMSC495";
-    private static final String USER = "root"; // Change this to mysql USERname
-    private static final String PWORD = "root"; // change this to mysql password
 
+        
+    private static final String USER = DBInteraction.getDBUsername(); 
+    private static final String PWORD = DBInteraction.getDBPassword(); 
+    
+    
     private String projectName;
     private int priority;
     private String projectAssignedTo;
@@ -221,7 +223,7 @@ public class Project
          }
          
          return projectIDList;
-    } // end loadProject()
+    } // end getProjectIDs()
      
      /**
      *
@@ -255,24 +257,6 @@ public class Project
          
      } // end deleteProject();
 
-     
-public static void main(String [ ] args) throws SQLException
-{
-    ArrayList<Integer> list = Project.getProjectIDs();
-    
-    for (int i = 0; i < list.size(); i++) 
-    {
-        System.out.println(list.get(i));
-        ResultSet rs = Project.loadProject(list.get(i));
-        
-        while (rs.next())
-        {
-            System.out.println(rs.getString("ProjectName"));
-        }
-    }
-                       
-}
-     
      
 } // end Project class
 

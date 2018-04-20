@@ -31,8 +31,6 @@ and open the template in the editor.
                     <ul>
                         <li><a href="index.html">Home</a></li>
                         <li><a href="Projects.jsp">Projects</a></li>
-                        <li><a href="Projects.html">Projects</a></li>
-                        <li><a href="Tasks.html">Tasks</a></li>
                         <li><a href="UserSetup.jsp">User Setup</a></li>
                     </ul>
                 </nav>
@@ -55,6 +53,7 @@ and open the template in the editor.
             <tr>
                 <th>User Name</th>
                 <th>User Role</th>
+                <th>Remove User</th>
             </tr>
             <%
                 ArrayList<Integer> list = User.getUserIDs();

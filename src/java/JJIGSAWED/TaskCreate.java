@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author jmehl
  */
-@WebServlet(name = "ProjectServlet", urlPatterns = {"/ProjectServlet"})
-public class ProjectServlet extends HttpServlet {
+@WebServlet(name = "TaskCreate", urlPatterns = {"/TaskCreate"})
+public class TaskCreate extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,36 +33,45 @@ public class ProjectServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        if (!"".equals(request.getParameter("project_name"))
-         && !"".equals(request.getParameter("project_summary"))
-         && !"".equals(request.getParameter("due_date"))
-         && !"".equals(request.getParameter("project_priority"))) 
-        {
-            // generate project ID
+        int projectID = Integer.parseInt(request.getParameter("ProjectID"));
+        
+        
+        if (!"".equals(request.getParameter("task_name"))
+         && !"".equals(request.getParameter("task_summary"))
+         && !"".equals(request.getParameter("date_created"))
+         && !"".equals(request.getParameter("task_priority"))
+         && !"".equals(request.getParameter("user_assignment"))) 
+        {   
+            // generate task ID
             Random rand = new Random();
-            int projectID = rand.nextInt(100000) + 1;
+            int taskID = rand.nextInt(100000) + 1;
             
             // convert priority to int
-            int priority = Integer.parseInt(request.getParameter("project_priority"));
+            int priority = Integer.parseInt(request.getParameter("task_priority"));
+            //int userID = Integer.parseInt(request.getParameter("user_assignment"));
+            int userID = 5;
             
-            Project prj = new Project(request.getParameter("project_name"),
+            Task tsk = new Task(request.getParameter("task_name"),
                     priority,
-                    request.getParameter("project_assigned_to"),
+                    userID,
                     projectID,
-                    request.getParameter("project_summary"),
-                    request.getParameter("due_date"));
+                    taskID,
+                    request.getParameter("task_summary"),
+                    request.getParameter("date_created"),
+                    request.getParameter("date_ended"));
+            
                     try
                     {
-                        response.sendRedirect("ProjectsSuccess.jsp");
+                        response.sendRedirect("TaskSuccess.jsp?ProjectID=" + projectID);
                     }
                     catch (IOException ex)
                     {
-                        response.sendRedirect("ProjectsFail.jsp");
+                        response.sendRedirect("TaskFail.jsp?ProjectID=" + projectID);
                     }
         }
         else
         {
-            response.sendRedirect("ProjectsFail.jsp");
+            response.sendRedirect("TaskFail.jsp?ProjectID=" + projectID);
         }
         
     }

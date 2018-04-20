@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,22 +15,22 @@ import java.sql.Statement;
  */
 public class Task {
     
-    private final String driver = "com.mysql.jdbc.Driver";
-    private final String connect = "jdbc:mysql://localhost:3306/CMSC495";
-    private final String user = "root"; // Change this to mysql username
-    private final String pword = "root"; // change this to mysql password 
+    private static final String DRIVER = "com.mysql.jdbc.Driver";
+    private static final String CONNECT = "jdbc:mysql://localhost:3306/CMSC495";
+    private static final String USER = DBInteraction.getDBUsername(); 
+    private static final String PWORD = DBInteraction.getDBPassword(); 
     
     private String taskName;
     private int priority;
     private String taskDateCreated;
     private int taskID;
     private int projectID;
-    private int userID;
+    private int USERID;
     private String taskSummary;
     private String taskDateEnded;
-    private Statement statement;
-    private PreparedStatement prepStatement;
-    private Connection con;
+    private static Statement statement;
+    private static PreparedStatement prepStatement;
+    private static Connection con;
     
     
      /**
@@ -37,7 +38,7 @@ public class Task {
      * Create Task and create record in task table
      * @param taskName - short name of task
      * @param priority - integer ranking priority of task
-     * @param userID - user assigned to project
+     * @param USERID - USER assigned to project
      * @param projectID - unique ID to project
      * @param taskID - unique ID to task
      * @param taskSummary - string describing task in more detail
@@ -47,14 +48,14 @@ public class Task {
      */
     
     public Task(String taskName, 
-            int priority, int userID, 
+            int priority, int USERID, 
             int projectID, int taskID,
             String taskSummary, String taskDateCreated,
             String taskDateEnded){ // Constructor will insert a task record
         
         this.taskName = taskName;
         this.priority = priority;
-        this.userID = userID;
+        this.USERID = USERID;
         this.projectID = projectID;
         this.taskID = taskID;
         this.taskSummary = taskSummary;
@@ -63,8 +64,8 @@ public class Task {
         
         try
          {
-             Class.forName(driver);
-             con = DriverManager.getConnection(connect,user,pword);
+             Class.forName(DRIVER);
+             con = DriverManager.getConnection(CONNECT,USER,PWORD);
              
              
          
@@ -72,7 +73,7 @@ public class Task {
                                                 + "(?,?,?,?,?,?,?,?);");
              prepStatement.setInt(1, taskID);
              prepStatement.setInt(2, projectID);
-             prepStatement.setInt(3, userID);
+             prepStatement.setInt(3, USERID);
              prepStatement.setString(4, taskName);
              prepStatement.setString(5, taskDateCreated);
              prepStatement.setString(6, taskDateEnded);
@@ -105,8 +106,8 @@ public class Task {
          
          try
          {        
-             Class.forName(driver);
-             con = DriverManager.getConnection(connect,user,pword);
+             Class.forName(DRIVER);
+             con = DriverManager.getConnection(CONNECT,USER,PWORD);
          
              prepStatement = con.prepareStatement("UPDATE Tasks "
                                                 + "SET " + colToModify + " = ?" 
@@ -141,8 +142,8 @@ public class Task {
          
          try
          {        
-             Class.forName(driver);
-             con = DriverManager.getConnection(connect,user,pword);
+             Class.forName(DRIVER);
+             con = DriverManager.getConnection(CONNECT,USER,PWORD);
          
              prepStatement = con.prepareStatement("UPDATE Tasks "
                                                 + "SET " + colToModify + " = ? " 
@@ -173,25 +174,23 @@ public class Task {
      * @return result set of select query
      * @author glane
      */
-      public ResultSet loadTasks(int projectID) 
+      public static ResultSet loadTasks(int projectID) 
      {
          ResultSet rs = null;
          
          try
          {        
-             Class.forName(driver);
-             con = DriverManager.getConnection(connect,user,pword);
+             Class.forName(DRIVER);
+             con = DriverManager.getConnection(CONNECT,USER,PWORD);
          
              prepStatement = con.prepareStatement("SELECT TaskName, TaskSummary, TaskPriority, TaskDateCreated, TaskDateEnded"
-                                                + "FROM Tasks"
-                                                + "WHERE projectID = ?");
+                                                + " FROM Tasks"
+                                                + " WHERE FKProjectID = ?");
 
              //prepStatement.setString(1, projectName);
              prepStatement.setInt(1, projectID);
          
              rs = prepStatement.executeQuery(); // perform update
-             
-             con.close();
          } 
          catch (ClassNotFoundException | SQLException ex) 
          {
@@ -200,6 +199,50 @@ public class Task {
          
          return rs;
     } // end loadTask()
+      
+     /**
+     *
+     * Find list of all taskIDs present in DB 
+     * @return result set of select query
+     * @author jmehl
+     */
+     public static ArrayList getTaskIDs(int projectID) 
+     {
+         
+         ArrayList<Integer> taskIDList = new ArrayList<Integer>();
+         
+         try
+         {        
+             Class.forName(DRIVER);
+             con = DriverManager.getConnection(CONNECT,USER,PWORD);
+         
+             prepStatement = con.prepareStatement("SELECT TaskID "
+                                                + "FROM CMSC495.Tasks "
+                                                + "WHERE FKProjectID = ?");
+         
+             prepStatement.setInt(1, projectID);
+             
+             ResultSet rs = prepStatement.executeQuery(); // perform query
+             
+             // convert resultset to array
+             while (rs.next()) 
+             {
+                int i = rs.getInt(1);
+                
+                taskIDList.add(i);
+             }
+         
+             con.close();    
+             rs.close();
+         }
+         catch (ClassNotFoundException | SQLException ex) 
+         {
+            System.out.println("An exception occured");
+            System.out.println(ex);
+         }
+         
+         return taskIDList;
+    } // end getTaskIDs()
       
       /**
      *
@@ -211,8 +254,8 @@ public class Task {
       public void deleteTask(int taskID){
           try
          {        
-             Class.forName(driver);
-             con = DriverManager.getConnection(connect,user,pword);
+             Class.forName(DRIVER);
+             con = DriverManager.getConnection(CONNECT,USER,PWORD);
          
              prepStatement = con.prepareStatement("DELETE FROM Tasks WHERE TaskID = ?;");
 

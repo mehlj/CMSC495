@@ -31,9 +31,7 @@
                     <ul>
                         <li><a href="index.html">Home</a></li>
                         <li><a href="Projects.jsp">Projects</a></li>
-                        <li><a href="Projects.html">Projects</a></li>
-                        <li><a href="Tasks.html">Tasks</a></li>
-                        <li><a href="UserSetup.html">User Setup</a></li>
+                        <li><a href="UserSetup.jsp">User Setup</a></li>
                     </ul>
                 </nav>
             </div>
@@ -69,6 +67,7 @@
                   <th>Priority</th>
                   <th>Summary</th>
                   <th>Remove</th>
+                  <th>Select</th>
                 </tr>
                 <%
                    ArrayList<Integer> list = Project.getProjectIDs();
@@ -90,6 +89,11 @@
                 <td>
                     <a href="ProjectRemove?ProjectName=<%= rs.getString("ProjectName") %>">
                     <button>Remove Project</button>
+                    </a>
+                </td>
+                <td>
+                    <a href="ProjectSelect?ProjectName=<%= rs.getString("ProjectName") %>">
+                    <button>Select Project</button>
                     </a>
                 </td>
                 </tr>

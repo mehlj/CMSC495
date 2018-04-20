@@ -27,8 +27,8 @@ public class ProjectRemove extends HttpServlet {
     
     private static final String DRIVER = "com.mysql.jdbc.Driver";
     private static final String CONNECT = "jdbc:mysql://localhost:3306/CMSC495";
-    private static final String USER = "root"; // Change this to mysql USERname
-    private static final String PWORD = "root"; // change this to mysql password
+    private static final String USER = DBInteraction.getDBUsername(); 
+    private static final String PWORD = DBInteraction.getDBPassword();  
     private static Statement statement;
     private static PreparedStatement prepStatement;
     private static Connection con;
