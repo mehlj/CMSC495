@@ -28,8 +28,8 @@ public class UserServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        if (request.getParameter("user_name") != null
-                && request.getParameter("user_role") != null) {
+        if (!"".equals(request.getParameter("user_name"))
+         && !"".equals(request.getParameter("user_role"))) {
 
             User usr = new User();
             usr.createUser(request.getParameter("user_name"), request.getParameter("user_role"));
