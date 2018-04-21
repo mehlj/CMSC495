@@ -170,11 +170,11 @@ public class Task {
      /**
      *
      * Search for project and return result set of SQL query
-     * @param projectID - unique ID tracking project
+     * @param taskID - unique ID tracking task
      * @return result set of select query
      * @author glane
      */
-      public static ResultSet loadTasks(int projectID) 
+      public static ResultSet loadTasks(int taskID) 
      {
          ResultSet rs = null;
          
@@ -183,12 +183,12 @@ public class Task {
              Class.forName(DRIVER);
              con = DriverManager.getConnection(CONNECT,USER,PWORD);
          
-             prepStatement = con.prepareStatement("SELECT TaskName, TaskSummary, TaskPriority, TaskDateCreated, TaskDateEnded"
+             prepStatement = con.prepareStatement("SELECT TaskName, TaskSummary, TaskPriority, TaskDateCreated, TaskDateEnded, FKUserID"
                                                 + " FROM Tasks"
-                                                + " WHERE FKProjectID = ?");
+                                                + " WHERE TaskID = ?");
 
              //prepStatement.setString(1, projectName);
-             prepStatement.setInt(1, projectID);
+             prepStatement.setInt(1, taskID);
          
              rs = prepStatement.executeQuery(); // perform update
          } 
@@ -251,7 +251,7 @@ public class Task {
      * @author glane
      */
       
-      public void deleteTask(int taskID){
+      public static void deleteTask(int taskID){
           try
          {        
              Class.forName(DRIVER);
@@ -272,6 +272,7 @@ public class Task {
          }
           
       } // deleteTask
+     
 }
 
 

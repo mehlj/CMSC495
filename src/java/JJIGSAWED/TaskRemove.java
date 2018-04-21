@@ -22,8 +22,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author enjoi
  */
-    @WebServlet(name = "UserRemove", urlPatterns = {"/UserRemove"})
-    public class UserRemove extends HttpServlet {
+    @WebServlet(name = "TaskRemove", urlPatterns = {"/TaskRemove"})
+    public class TaskRemove extends HttpServlet {
 
         private static final String DRIVER = "com.mysql.jdbc.Driver";
         private static final String CONNECT = "jdbc:mysql://localhost:3306/CMSC495";
@@ -46,30 +46,31 @@ import javax.servlet.http.HttpServletResponse;
                 throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
 
-            String userName = request.getParameter("user_name");
-            int userID = 0;
+            String taskName = request.getParameter("TaskName");
+            int projectID = Integer.parseInt(request.getParameter("ProjectID"));
+            int taskID = 0;
 
             // obtain projectID of row from given projectName
             try {
                 Class.forName(DRIVER);
                 con = DriverManager.getConnection(CONNECT, USER, PWORD);
 
-                prepStatement = con.prepareStatement("SELECT userID "
-                        + "FROM CMSC495.Users "
-                        + "WHERE name = ?");
+                prepStatement = con.prepareStatement("SELECT TaskID "
+                        + "FROM CMSC495.Tasks "
+                        + "WHERE TaskName = ?");
 
-                prepStatement.setString(1, userName);
+                prepStatement.setString(1, taskName);
 
                 ResultSet rs = prepStatement.executeQuery(); // perform update
 
                 while (rs.next()) {
-                    userID = rs.getInt(1);
+                    taskID = rs.getInt(1);
                 }
 
-                User.deleteUser(userID);
+                Task.deleteTask(taskID);
 
                 // redirect to success page
-                response.sendRedirect("UserSuccess.jsp");
+                response.sendRedirect("TaskSuccess.jsp?ProjectID=" + projectID);
             } catch (ClassNotFoundException | SQLException ex) {
                 System.out.println("An exception occured");
                 System.out.println(ex);

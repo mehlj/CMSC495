@@ -173,4 +173,41 @@ public class User {
          
          return rs;
     } // end getUser()
+    
+    /**
+     *
+     * Obtain name of user given just the userID
+     *
+     * @param userID - unique user ID
+     * @return - name of user
+     * @author jmehl
+    */
+    public static String getUserName(int userID)
+    {
+        String userName = "";
+        
+        try 
+        {
+                Class.forName(driver);
+                con = DriverManager.getConnection(connect, USER, PWORD);
+
+                prepStatement = con.prepareStatement("SELECT Name "
+                        + "FROM CMSC495.Users "
+                        + "WHERE UserID = ?");
+
+                prepStatement.setInt(1, userID);
+
+                ResultSet rs = prepStatement.executeQuery(); // perform update
+                
+                while (rs.next()) {
+                    userName = rs.getString(1);
+                }
+        }
+        
+        catch (ClassNotFoundException | SQLException ex)
+        {
+            System.out.println(ex);
+        }
+        return userName;
+    }
 }

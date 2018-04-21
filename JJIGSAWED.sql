@@ -30,8 +30,8 @@ TaskDateCreated VARCHAR(100) NOT NULL,
 TaskDateEnded VARCHAR(100),
 TaskPriority INT NOT NULL,
 TaskSummary VARCHAR(2000) NOT NULL,
-FOREIGN KEY (FKProjectID) references Projects(ProjectID),
-FOREIGN KEY (FKUserID) references Users(UserID),
+FOREIGN KEY (FKProjectID) references Projects(ProjectID) ON DELETE CASCADE,
+FOREIGN KEY (FKUserID) references Users(UserID) ON DELETE CASCADE,
 PRIMARY KEY(TaskID)
 );
 
