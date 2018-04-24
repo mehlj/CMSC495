@@ -54,6 +54,7 @@ and open the template in the editor.
                 <th>User Name</th>
                 <th>User Role</th>
                 <th>Remove User</th>
+                <th>Inactivate User</th>
             </tr>
             <%
                 ArrayList<Integer> list = User.getUserIDs();
@@ -70,6 +71,11 @@ and open the template in the editor.
                 <td>
                     <a href="UserRemove?user_name=<%= rs.getString("name")%>">
                         <button>Remove User</button>
+                    </a>
+                </td>
+                <td>
+                    <a href="UserInactive?user_name=<%= rs.getString("name")%>">
+                        <button>Inactivate User</button>
                     </a>
                 </td>
             </tr>
