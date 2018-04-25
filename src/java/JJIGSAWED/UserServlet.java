@@ -27,17 +27,23 @@ public class UserServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String methodResponse;
 
         if (!"".equals(request.getParameter("user_name"))
-         && !"".equals(request.getParameter("user_role"))) {
+                && !"".equals(request.getParameter("user_role"))) {
 
             User usr = new User();
-            usr.createUser(request.getParameter("user_name"), request.getParameter("user_role"));
+            methodResponse = usr.createUser(request.getParameter("user_name"), request.getParameter("user_role"));
+            if (!methodResponse.equals("Exception")) {
 
-            try {
-                response.sendRedirect("UserSuccess.jsp");
-            } catch (IOException ex) {
+                try {
+                    response.sendRedirect("UserSuccess.jsp");
+                } catch (IOException ex) {
 
+                    response.sendRedirect("UserFail.jsp");
+                }
+            }
+            else{
                 response.sendRedirect("UserFail.jsp");
             }
 

@@ -15,8 +15,8 @@ import java.util.Random;
  */
 public class User {
 
-    private final static String driver = "com.mysql.jdbc.Driver";
-    private final static String connect = "jdbc:mysql://localhost:3306/CMSC495";
+    private static final String driver = DBInteraction.getDBDriver();
+    private static final String connect = DBInteraction.getDBConnect();
     private static final String USER = DBInteraction.getDBUsername(); 
     private static final String PWORD = DBInteraction.getDBPassword(); 
 
@@ -34,22 +34,48 @@ public class User {
      * @param userRole - Role of the user being added
      * @author glane
      */
-    public void createUser(String userName, String userRole) {
+    public String createUser(String userName, String userRole) {
         this.userName = userName;
         this.userRole = userRole;
+        String userCheck = "";
+        ResultSet rs;
 
         Random rand = new Random();
         int userID = 0 + rand.nextInt(500);
+        try {
+            Class.forName(driver);
+            con = DriverManager.getConnection(connect, USER, PWORD);
+
+            prepStatement = con.prepareStatement("SELECT Name FROM Users WHERE Name = ? ");
+            prepStatement.setString(1, userName);
+
+            rs = prepStatement.executeQuery(); // perform insert
+            while(rs.next()){
+                userCheck = rs.getString("Name");
+            }
+
+            con.close();
+        } catch (ClassNotFoundException | SQLException ex) {
+            // System.out.println("An exception occurred");
+            System.out.println(ex.getMessage());
+            return "Exception";
+        }
+        
+        if(userCheck.equals(userName)){
+            return "Exception";
+        }
+        
 
         try {
             Class.forName(driver);
             con = DriverManager.getConnection(connect, USER, PWORD);
 
-            prepStatement = con.prepareStatement("Insert into Users(userID,Name,Role) values "
-                    + "(?,?,?);");
+            prepStatement = con.prepareStatement("Insert into Users(userID,Name,Role,Inactive) values "
+                    + "(?,?,?,?);");
             prepStatement.setInt(1, userID);
             prepStatement.setString(2, userName);
             prepStatement.setString(3, userRole);
+            prepStatement.setInt(4,0);
 
             prepStatement.execute(); // perform insert
 
@@ -57,8 +83,9 @@ public class User {
         } catch (ClassNotFoundException | SQLException ex) {
             // System.out.println("An exception occurred");
             System.out.println(ex.getMessage());
+            return "Exception";
         }
-
+            return "UserCreated";
     }
 
     /**
@@ -90,6 +117,29 @@ public class User {
             con.close();
         } catch (ClassNotFoundException | SQLException ex) {
             System.out.println("An exception occurred");
+        }
+    }
+    
+    public static void inactivateUser(String userName, int userID) {
+
+        try {
+            Class.forName(driver);
+            con = DriverManager.getConnection(connect, USER, PWORD);
+
+            prepStatement = con.prepareStatement("UPDATE Users "
+                    + "SET Inactive = 1" // Replaced ? with column name, prepStatemnet.setString adds " " around column name
+                    + " WHERE userID = ? AND Name = ?;");
+
+            prepStatement.setInt(1, userID);
+            prepStatement.setString(2, userName);
+
+            prepStatement.execute(); // perform update
+
+            con.close();
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.println("An exception occurred");
+            //System.out.println(ex.getMessage());
+            //System.out.println(prepStatement.toString());
         }
     }
 
@@ -127,7 +177,7 @@ public class User {
             con = DriverManager.getConnection(connect, USER, PWORD);
 
             prepStatement = con.prepareStatement("SELECT * "
-                    + "FROM CMSC495.Users");
+                    + "FROM CMSC495.Users WHERE Inactive = 0");
 
             ResultSet rs = prepStatement.executeQuery(); // perform select
 
@@ -158,7 +208,7 @@ public class User {
          
              prepStatement = con.prepareStatement("SELECT * "
                                                 + "FROM CMSC495.Users "
-                                                + "WHERE userID = ?");
+                                                + "WHERE userID = ? AND Inactive = 0");
              
              prepStatement.setInt(1, userID);
          
@@ -193,7 +243,7 @@ public class User {
 
                 prepStatement = con.prepareStatement("SELECT Name "
                         + "FROM CMSC495.Users "
-                        + "WHERE UserID = ?");
+                        + "WHERE UserID = ? AND Inactive = 0");
 
                 prepStatement.setInt(1, userID);
 

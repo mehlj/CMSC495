@@ -22,10 +22,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author enjoi
  */
-    @WebServlet(name = "TaskRemove", urlPatterns = {"/TaskRemove"})
-    public class TaskRemove extends HttpServlet {
+    @WebServlet(name = "UserInactive", urlPatterns = {"/UserInactive"})
+    public class UserInactive extends HttpServlet {
 
-        private static final String DRIVER = DBInteraction.getDBDriver();
+           private static final String DRIVER = DBInteraction.getDBDriver();
         private static final String CONNECT = DBInteraction.getDBConnect();
         private static final String USER = DBInteraction.getDBUsername(); 
         private static final String PWORD = DBInteraction.getDBPassword(); 
@@ -46,31 +46,30 @@ import javax.servlet.http.HttpServletResponse;
                 throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
 
-            String taskName = request.getParameter("TaskName");
-            int projectID = Integer.parseInt(request.getParameter("ProjectID"));
-            int taskID = 0;
+            String userName = request.getParameter("user_name");
+            int userID = 0;
 
             // obtain projectID of row from given projectName
             try {
                 Class.forName(DRIVER);
                 con = DriverManager.getConnection(CONNECT, USER, PWORD);
 
-                prepStatement = con.prepareStatement("SELECT TaskID "
-                        + "FROM CMSC495.Tasks "
-                        + "WHERE TaskName = ?");
+                prepStatement = con.prepareStatement("SELECT userID "
+                        + "FROM CMSC495.Users "
+                        + "WHERE name = ?");
 
-                prepStatement.setString(1, taskName);
+                prepStatement.setString(1, userName);
 
                 ResultSet rs = prepStatement.executeQuery(); // perform update
 
                 while (rs.next()) {
-                    taskID = rs.getInt(1);
+                    userID = rs.getInt(1);
                 }
 
-                Task.deleteTask(taskID);
+                User.inactivateUser(userName,userID);
 
                 // redirect to success page
-                response.sendRedirect("TaskSuccess.jsp?ProjectID=" + projectID);
+                response.sendRedirect("UserSuccess.jsp");
             } catch (ClassNotFoundException | SQLException ex) {
                 System.out.println("An exception occured");
                 System.out.println(ex);

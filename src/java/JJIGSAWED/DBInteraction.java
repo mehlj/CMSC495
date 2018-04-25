@@ -12,6 +12,7 @@ public class DBInteraction
 {
     
     public static String fileName = "/etc/jjigsawed/database.properties";
+    //public static String fileName = "/Users/enjoi/Desktop/WebApplication1/etc/jjigsawed/database.properties";
     
     /**
     *
@@ -63,5 +64,46 @@ public class DBInteraction
         }
         
         return dbPassword;
-    }    
+    }
+
+    public static String getDBConnect(){
+        String dbConnect = "";
+        
+        Properties properties = new Properties();
+        
+        try
+        {
+            FileInputStream input = new FileInputStream(fileName);
+            properties.load(input);
+            
+            dbConnect = properties.getProperty("DB_CONNECT");
+        }
+        catch (IOException io)
+        {
+            System.getProperty("user.dir");
+        }
+        
+        
+        return dbConnect;
+    }
+       public static String getDBDriver(){
+        String dbDriver = "";
+        
+        Properties properties = new Properties();
+        
+        try
+        {
+            FileInputStream input = new FileInputStream(fileName);
+            properties.load(input);
+            
+            dbDriver = properties.getProperty("DB_DRIVER");
+        }
+        catch (IOException io)
+        {
+            System.getProperty("user.dir");
+        }
+        
+        
+        return dbDriver;
+    }
 }
