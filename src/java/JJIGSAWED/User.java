@@ -15,8 +15,8 @@ import java.util.Random;
  */
 public class User {
 
-    private final static String driver = "com.mysql.jdbc.Driver";
-    private final static String connect = "jdbc:mysql://localhost:3306/CMSC495";
+    private static final String driver = DBInteraction.getDBDriver();
+    private static final String connect = DBInteraction.getDBConnect();
     private static final String USER = DBInteraction.getDBUsername(); 
     private static final String PWORD = DBInteraction.getDBPassword(); 
 
