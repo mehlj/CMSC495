@@ -11,8 +11,8 @@ import java.util.Properties;
 public class DBInteraction 
 {
     
-   // public static String fileName = "/etc/jjigsawed/database.properties";
-    public static String fileName = "/Users/enjoi/Desktop/WebApplication1/etc/jjigsawed/database.properties";
+    public static String fileName = "/etc/jjigsawed/database.properties";
+    //public static String fileName = "/Users/enjoi/Desktop/WebApplication1/etc/jjigsawed/database.properties";
     
     /**
     *
