@@ -30,7 +30,7 @@ Date: 4/13/2018
   <!-- Header -->
   <div class="jumbotron">
     <h1 align='center'>Manage Projects</h1>
-     <h2 align='center'style="color:red;">OPERATION FAIL</h2>
+     <div class="alert alert-danger" role="alert" align="center">Something Went Wrong, Please Try Again!</div>
     <nav class="navbar navbar-right">
       <ul class="nav navbar-nav nav-pills nav-fill">
         <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>

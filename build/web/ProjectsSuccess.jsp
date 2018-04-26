@@ -1,9 +1,9 @@
-<%-- 
-    Document   : ProjectsSuccess
-    Created on : Apr 16, 2018, 11:24:20 PM
-    Author     : jmehl
---%>
-
+<!DOCTYPE html>
+<!--
+HTML written by: Dave Thatcher & Jason Willis  
+Class: CMSC 495 UMUC
+Date: 4/13/2018
+-->
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.Connection"%>
@@ -13,64 +13,153 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="JJIGSAWED.Project"%>
-<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>JJIGSAWED Task Tracking Software</title>
-        <link rel= "stylesheet" href="./style.css">
-    </head>
-    <body>
-        <header>
-            <div class="container">
-                <div id="software_name">
-                    <h1>Project Management</h1>
-                    <h2><p style="color:green;">OPERATION SUCCESS</p></h2>
-                </div>
-                <nav>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="Projects.jsp">Projects</a></li>
-                        <li><a href="UserSetup.jsp">User Setup</a></li>
-                    </ul>
-                </nav>
+
+<head>
+  <title>Projects Page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+</head>
+
+<body>
+  <!-- Header -->
+  <div class="jumbotron">
+    <h1 align='center'>Manage Projects</h1>
+     <div class="alert alert-success" role="alert" align="center">Success!</div>
+    <nav class="navbar navbar-right">
+      <ul class="nav navbar-nav nav-pills nav-fill">
+        <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+        <li class="nav-item active"><a class="nav-link active" href="Projects.jsp">Projects</a></li>
+        <li class="nav-item"><a class="nav-link active" href="UserSetup.jsp">UserSetup</a></li>
+        <li class="nav-item"><a class="nav-link active" href="#.html">Sign Out</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Could Use Alerts Success/Error after Save | Search:  https://getbootstrap.com/docs/3.3/components/#alerts
+  <div class="alert alert-success" role="alert">You Successfully Saved Your Information!</div>
+  <div class="alert alert-danger" role="alert">Something Went Wrong, Please Try Again!</div> -->
+
+  <!-- Input / Search Form -->
+  <!-- Top Row -->
+  <div class="container" id="projectInput">
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">Project Informaton to Input or Search:</div>
+      <!-- <div class="col-xs-12 col-sm-12"> -->
+      <!-- The Whole Form - Both Rows -->
+      <!-- <form> -->
+      <!-- Project Name -->
+      <!-- <div class="col-sm-3"> -->
+      <form class="form-horizontal" action="${pageContext.request.contextPath}/ProjectServlet" method="post">
+        <div class="form-group.required" style="margin:5px">
+          <label class="control-label mt-2 col-sm-2">*Project Name:</label>
+          <div class="col-sm-4">
+            <input class="form-control" type="text" name='project_name' id="projectName" placeholder="JJIGSAWED">
+          </div>
+        </div>
+      
+      <!-- </div> -->
+
+      <!-- Due Date -->
+      <!-- <div class="col-sm-3"> -->
+      
+        <div class="form-group.required" style="margin:5px">
+          <label class="control-label col-sm-2">*Due Date:</label>
+          <div class="col-sm-4">
+            <input class="form-control" type="date" name='due_date' id="projectDueDate">
+          </div>
+        </div>
+      
+     <!-- <div class="form-group.required" style="margin:5px">
+          <label class="control-label col-sm-2">*Project Assigned To</label>
+          <div class="col-sm-4">
+            <input class="form-control" type="text" name='project_assigned_to' id="projectDueDate">
+          </div>
+        </div> -->
+
+      <!-- </div> -->
+
+      <!-- Priority -->
+      <!-- <div class="col-sm-3"> -->
+  
+        <div class="form-group.required" style="margin-top:60px">
+          <label class="control-label col-sm-2">*Priority:</label>
+          <div class="col-sm-4">
+            <select class="form-control" name="project_priority" id="selectRole">
+              <option value=1>Low</option>
+              <option value=2>Medium</option>
+              <option value=3>High</option>
+            </select>
+          </div>
+        </div>
+    
+
+      <!-- Search | Save buttons -->
+    
+        <div class="form-group.required" style="margin-top:60px">
+          <label class="control-label col-sm-2">*Search | Save:</label>
+          <div class="col-sm-4">
+            <button type="button" class="btn btn-info">Search</button>
+            <button type="submit" class="btn btn-success">Save</button>
+          </div>
+        </div>
+  
+
+      <!-- Project Summary -->
+      
+        <div class="form-group">
+          <div class="form-group.required" style="margin-top:60px; margin-left:10px">
+            <label class="control-label col-sm-2">*Project Summary:</label>
+            <div class="col-sm-8">
+              <textarea class="form-control" id="projectSummary" name="project_summary" rows="5" placeholder="Describe your project here..."></textarea>
             </div>
-        </header>
-        <form action="${pageContext.request.contextPath}/ProjectServlet" method="post">
-            <fieldset>
-                <legend>Project Information:</legend>
-                Project Name: <input type ="text" name="project_name">
-                Project Summary: <textarea name ="project_summary" 
-                                            rows="10" cols="30"></textarea><br>
-                Due Date: <input type="date" name="due_date"> <br>
-                Priority: <select name="project_priority"> 
-                    <option value="3">Low</option>
-                    <option value="2">Normal</option>
-                    <option value="1">High</option>
-                </select><br>        
-                Assigned To: <input type="text" name="project_assigned_to"><br>
-                Schedule Filter: <select name="schedule_filter"> 
-                    <option value="0">All</option>
-                    <option value="7">7 Days</option>
-                    <option value="14">14 Days</option>
-                    <option value="30">30 Days</option>
-                </select><br><br>
-            </fieldset>
-            <input type="submit" value="Add Project">
-        </form>
-        
-            <table border=1 cellpadding=5>
-                <tr>
-                  <th>Name</th>
-                  <th>Assigned To</th>
-                  <th>Due</th>
-                  <th>Priority</th>
-                  <th>Summary</th>
-                  <th>Remove</th>
-                  <th>Select</th>
-                </tr>
-                <%
+          </div>
+            <div class="form-group.required" style="margin:5px">
+          <label class="control-label col-sm-2">*Project Assigned To:</label>
+          <div class="col-sm-4">
+            <input class="form-control" type="text" name='project_assigned_to' id="projectassignedto">
+          </div>
+        </div>
+        </div>
+      
+    
+      <!-- Whole Form -->
+       </form>
+    </div>
+  </div>
+  </div>
+  <!-- Container Div -->
+  </div>
+
+  <br />
+  <br />
+
+  <!-- Table -->
+  <div class="container">
+    <div class="panel panel-default">
+      <!-- Table panel contents -->
+      <div class="panel-heading">Your Projects:</div>
+      <!-- <div class="container"> -->
+      <table class="table table-hover table-responsive-md table-fixed">
+        <thead>
+          <tr>
+            <th>Select</th>
+            <th>Project Name</th>
+            <th>Due Date</th>
+            <th>Priority</th>
+            <th>Project Summary</th>
+            <th>Edit</th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+           <%
                    ArrayList<Integer> list = Project.getProjectIDs();
 
                    for (int i = 0; i < list.size(); i++) 
@@ -97,14 +186,52 @@
                     <button>Select Project</button>
                     </a>
                 </td>
-                </tr>
-                <%
+        </tbody>
+        <%
 
                        }
                    }
 
                 %>
-            </table>
-        
-    </body>
+      </table>
+      <!-- Close Panel for Table -->
+    </div>
+    <!-- Close Panel Container -->
+  </div>
+  <!-- Close Main Container -->
+  </div>
+
+  <!-- Pagination -->
+  <nav aria-label="Page navigation" align='center'>
+    <ul class="pagination">
+      <li>
+        <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+      </li>
+      <li><a href="#">1</a></li>
+      <li><a href="#">2</a></li>
+      <li><a href="#">3</a></li>
+      <li><a href="#">4</a></li>
+      <li><a href="#">5</a></li>
+      <li>
+        <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+      </li>
+    </ul>
+  </nav>
+
+
+  <!-- Footer -->
+  <div class="footer navbar-fixed-bottom well">
+    <p class="text-center text-muted">JJIGSAWED Software Company, Copyright 2018.</p>
+  </div>
+
+  <!-- Bootstrap 4.0 -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" crossorigin="anonymous"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</body>
+
 </html>

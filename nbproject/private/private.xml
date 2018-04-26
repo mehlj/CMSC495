@@ -10,16 +10,14 @@
             <file>file:/home/jmehl/NetBeansProjects/CMSC495/web/Projects.jsp</file>
             <file>file:/home/jmehl/NetBeansProjects/CMSC495/web/ProjectsSuccess.jsp</file>
             <file>file:/home/jmehl/NetBeansProjects/CMSC495/web/ProjectsFail.jsp</file>
-            <file>file:/home/jmehl/NetBeansProjects/CMSC495/src/java/JJIGSAWED/Task.java</file>
-            <file>file:/home/jmehl/NetBeansProjects/CMSC495/src/java/JJIGSAWED/User.java</file>
             <file>file:/home/jmehl/NetBeansProjects/CMSC495/web/TaskSuccess.jsp</file>
             <file>file:/home/jmehl/NetBeansProjects/CMSC495/src/java/JJIGSAWED/Project.java</file>
             <file>file:/home/jmehl/NetBeansProjects/CMSC495/web/UserSuccess.jsp</file>
-            <file>file:/home/jmehl/NetBeansProjects/CMSC495/src/java/JJIGSAWED/ProjectRemove.java</file>
             <file>file:/home/jmehl/NetBeansProjects/CMSC495/web/TaskFail.jsp</file>
+            <file>file:/home/jmehl/NetBeansProjects/CMSC495/src/java/JJIGSAWED/TaskCreate.java</file>
+            <file>file:/home/jmehl/NetBeansProjects/CMSC495/web/TasksBak.jsp</file>
             <file>file:/home/jmehl/NetBeansProjects/CMSC495/web/Tasks.jsp</file>
             <file>file:/home/jmehl/NetBeansProjects/CMSC495/src/java/JJIGSAWED/TaskRemove.java</file>
-            <file>file:/home/jmehl/NetBeansProjects/CMSC495/src/java/JJIGSAWED/ProjectServlet.java</file>
         </group>
     </open-files>
 </project-private>

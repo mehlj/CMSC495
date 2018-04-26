@@ -1,79 +1,295 @@
 <!DOCTYPE html>
 <!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
+HTML written by: Dave Thatcher & Jason Willis 
+Class: CMSC 495 UMUC
+Date: 4/13/2018
 -->
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>JJIGSAWED Task Tracking Software</title>
-        <link rel= "stylesheet" href="./style.css">
-    </head>
-    <body>
-        <header>
-            <div class="container">
-                <div id="software_name">
-                    <h1>Task Management</h1>
-                </div>
-                <nav>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="Projects.jsp">Projects</a></li>
-                        <li><a href="Tasks.html">Tasks</a></li>
-                        <li><a href="UserSetup.jsp">User Setup</a></li>
-                    </ul>
-                </nav>
+
+<head>
+  <title>Tasks Page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+</head>
+
+<body>
+  <!-- <header> -->
+  <div class="jumbotron">
+    <h1 align='center'>Manage Tasks</h1>
+    <nav class="navbar navbar-right">
+      <ul class="nav navbar-nav nav-pills nav-fill">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="Projects.html">Projects</a></li>
+        <li class="active"><a href="Tasks.html">Tasks</a></li>
+        <li><a href="UserSetup.html">User Setup</a></li>
+        <li><a href="#">Sign Out</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Could Use Alerts Success/Error after Save | Search:  https://getbootstrap.com/docs/3.3/components/#alerts
+<div class="alert alert-success" role="alert">You Successfully Saved Your Information!</div>
+<div class="alert alert-danger" role="alert">Something Went Wrong, Please Try Again!</div> -->
+
+  <!-- Input / Search Form -->
+  <!-- Top Row -->
+  <div class="container" id="projectInput">
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">Project Informaton to Input or Search:</div>
+      <!-- <div class="col-xs-12 col-sm-12"> -->
+
+      <!-- Task Name -->
+      <!-- <div class="col-sm-3"> -->
+      <form class="form-horizontal" action="">
+        <div class="form-group.required" style="margin-top: 10px">
+          <label class="control-label mt-2 col-sm-2">*Task Name:</label>
+          <div class="col-sm-4">
+            <input class="form-control" type="text" id="taskName" placeholder="JJIGSAWED">
+          </div>
+        </div>
+      </form>
+
+      <!-- Priority -->
+      <!-- <div class="col-sm-3"> -->
+      <form class="form-horizontal" action="">
+        <div class="form-group.required" style="margin-top: 10px">
+          <label class="control-label col-sm-2">*Priority:</label>
+          <div class="col-sm-4">
+            <select class="form-control" id="selectRole">
+            <option>Low</option>
+            <option>Medium</option>
+            <option>High</option>
+          </select>
+          </div>
+        </div>
+      </form>
+
+      <!-- Start Date -->
+      <!-- <div class="col-sm-3"> -->
+      <form class="form-horizontal" action="">
+        <div class="form-group.required" style="margin-top: 60px">
+          <label class="control-label col-sm-2">*Start Date:</label>
+          <div class="col-sm-4">
+            <input class="form-control" type="date" id="taskStartDate">
+          </div>
+        </div>
+      </form>
+
+      <!-- Due Date -->
+      <!-- <div class="col-sm-3"> -->
+      <form class="form-horizontal" action="">
+        <div class="form-group.required" style="margin-top: 60px">
+          <label class="control-label col-sm-2">*Due Date:</label>
+          <div class="col-sm-4">
+            <input class="form-control" type="date" id="taskDueDate">
+          </div>
+        </div>
+      </form>
+      <!-- Search | Save buttons -->
+      <form class="form-horizontal" action="">
+        <div class="form-group.required" style="margin-top: 110px">
+          <label class="control-label col-sm-2">*Search | Save:</label>
+          <div class="col-sm-4">
+            <button type="button" class="btn btn-info">Search</button>
+            <button type="button" class="btn btn-success">Save</button>
+          </div>
+        </div>
+      </form>
+
+      <!-- Task Summary -->
+      <form class="form-horizontal" action="">
+        <div class="form-group">
+          <div class="form-group.required" style="margin-top: 50px; margin-left:10px">
+            <label class="control-label col-sm-2">*Task Summary:</label>
+            <div class="col-sm-4">
+              <textarea class="form-control" id="taskSummary" rows="5" placeholder="Describe your task here..."></textarea>
             </div>
-        </header>
+          </div>
+        </div>
+      </form>
 
-        <form>
-            <fieldset>
-                <legend>Task Information:</legend>
-                *Task Name: <input type ="text" name="task_name">
-                *Task Summary: <textarea name ="task_summary" 
-                                         rows="10" cols="30"></textarea><br>
-                Date Created: <input type="date" name="date_created"> <br>
-                Date Ended: <input type="date" name="date_ended"> <br>
+      <!-- Whole Form -->
+      <!-- </form> -->
+    </div>
+  </div>
+  <!-- </div> -->
+  <!-- Container Div -->
+  </div>
 
-                Priority: <select name="task_priority"> 
-                    <option value="3">Low</option>
-                    <option value="2">Normal</option>
-                    <option value="1">High</option>
-                </select><br>        
+  <br />
+  <br />
 
-                Schedule Filter: <select name="schedule_filter"> 
-                    <option value="0">All</option>
-                    <option value="7">7 Days</option>
-                    <option value="14">14 Days</option>
-                    <option value="30">30 Days</option>
-                </select><br><br>
-            </fieldset>
-            <input type="submit" value="Search">
-            <input type="submit" value="Add Task">
-        </form>
-        <section id="table">
-            <div class="container">
-                <table border ="1">
-                    <tr>
-                        <td>Task Name</td>
-                        <td>Date</td>
-                        <td>Priority</td>
-                        <td>Task</td>  
-                        <td>Project</td>  
-                    </tr>
+  <div class="container">
+    <table class="table table-hover table-responsive-md table-fixed">
+      <thead>
+        <tr>
+          <th>Select</th>
+          <th>Task Name</th>
+          <th>Date Created</th>
+          <th>Priority</th>
+          <th>Task Summary</th>
+          <th>Project</th>
+          <th>Edit</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="">
+            <input type="checkbox" class="chooseRow" id="checkboxTasks">
+            <label for="checkboxTasks" class="label-table"></label>
+          </td>
+          <td>Build database</td>
+          <td>04/13/2018</td>
+          <td>Medium</td>
+          <td>This task will create the tables in the DB</td>
+          <td>CMSC 495</td>
+          <td><button>Edit</button></td>
+          <td><button>Remove</button></td>
+        </tr>
+        <tr>
+          <td class="">
+            <input type="checkbox" class="chooseRow" id="checkboxTasks">
+            <label for="checkboxTasks" class="label-table"></label>
+          </td>
+          <td>Build database</td>
+          <td>04/13/2018</td>
+          <td>Medium</td>
+          <td>This task will create the tables in the DB</td>
+          <td>CMSC 495</td>
+          <td><button>Edit</button></td>
+          <td><button>Remove</button></td>
+        </tr>
+        <tr>
+          <td class="">
+            <input type="checkbox" class="chooseRow" id="checkboxTasks">
+            <label for="checkboxTasks" class="label-table"></label>
+          </td>
+          <td>Build database</td>
+          <td>04/13/2018</td>
+          <td>Medium</td>
+          <td>This task will create the tables in the DB</td>
+          <td>CMSC 495</td>
+          <td><button>Edit</button></td>
+          <td><button>Remove</button></td>
+        </tr>
+        <tr>
+          <td class="">
+            <input type="checkbox" class="chooseRow" id="checkboxTasks">
+            <label for="checkboxTasks" class="label-table"></label>
+          </td>
+          <td>Build database</td>
+          <td>04/13/2018</td>
+          <td>Medium</td>
+          <td>This task will create the tables in the DB</td>
+          <td>CMSC 495</td>
+          <td><button>Edit</button></td>
+          <td><button>Remove</button></td>
+        </tr>
+        <tr>
+          <td class="">
+            <input type="checkbox" class="chooseRow" id="checkboxTasks">
+            <label for="checkboxTasks" class="label-table"></label>
+          </td>
+          <td>Build database</td>
+          <td>04/13/2018</td>
+          <td>Medium</td>
+          <td>This task will create the tables in the DB</td>
+          <td>CMSC 495</td>
+          <td><button>Edit</button></td>
+          <td><button>Remove</button></td>
+        </tr>
+        <tr>
+          <td class="">
+            <input type="checkbox" class="chooseRow" id="checkboxTasks">
+            <label for="checkboxTasks" class="label-table"></label>
+          </td>
+          <td>Build database</td>
+          <td>04/13/2018</td>
+          <td>Medium</td>
+          <td>This task will create the tables in the DB</td>
+          <td>CMSC 495</td>
+          <td><button>Edit</button></td>
+          <td><button>Remove</button></td>
+        </tr>
+        <tr>
+          <td class="">
+            <input type="checkbox" class="chooseRow" id="checkboxTasks">
+            <label for="checkboxTasks" class="label-table"></label>
+          </td>
+          <td>Build database</td>
+          <td>04/13/2018</td>
+          <td>Medium</td>
+          <td>This task will create the tables in the DB</td>
+          <td>CMSC 495</td>
+          <td><button>Edit</button></td>
+          <td><button>Remove</button></td>
+        </tr>
+        <tr>
+          <td class="">
+            <input type="checkbox" class="chooseRow" id="checkboxTasks">
+            <label for="checkboxTasks" class="label-table"></label>
+          </td>
+          <td>Build database</td>
+          <td>04/13/2018</td>
+          <td>Medium</td>
+          <td>This task will create the tables in the DB</td>
+          <td>CMSC 495</td>
+          <td><button>Edit</button></td>
+          <td><button>Remove</button></td>
+        </tr>
+        <tr>
+          <td class="">
+            <input type="checkbox" class="chooseRow" id="checkboxTasks">
+            <label for="checkboxTasks" class="label-table"></label>
+          </td>
+          <td>Build database</td>
+          <td>04/13/2018</td>
+          <td>Medium</td>
+          <td>This task will create the tables in the DB</td>
+          <td>CMSC 495</td>
+          <td><button>Edit</button></td>
+          <td><button>Remove</button></td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  <nav aria-label="Page navigation" align='center'>
+    <ul class="pagination">
+      <li>
+        <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+      </li>
+      <li><a href="#">1</a></li>
+      <li><a href="#">2</a></li>
+      <li><a href="#">3</a></li>
+      <li><a href="#">4</a></li>
+      <li><a href="#">5</a></li>
+      <li>
+        <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+      </li>
+    </ul>
+  </nav>
 
 
-                </table>
+  <!-- Footer -->
+  <div class="footer navbar-fixed-bottom well">
+    <p class="text-center text-muted">JJIGSAWED Software Company, Copyright 2018.</p>
+  </div>
 
-            </div>
-        </section>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</body>
 
-        <footer>
-            <p>
-                JJIGSAWED Software Company, Copyright 2018.
-            </p>
-        </footer>
-    </body>
 </html>

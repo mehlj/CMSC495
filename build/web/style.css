@@ -1,108 +1,118 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : Mar 15, 2018, 6:42:10 PM
-    Author     : Dave
-*/
-body{
-
-    font:15px/1.5 Arial, Helvetica, sans-serif;
-    padding: 0;
-    margin: 0;
-    background-color:  grey;
+body {
+  padding-top: 50px;
+  overflow: scroll !important;
 }
 
-.container{
-    width: 80%;
-    margin: auto;
-    overflow: hidden;
+/* .jumbotron {
+  padding: 200px 0 140px 0;
+  margin-bottom: 70px;
+  background-color: black;
 }
 
-ul{
-    margin: 0;
-    padding: 0;    
-}
-header{
-    background: #35424a;
-    color: #ffffff;
-    padding-top: 30px;
-    min-height: 70px;
-    border-bottom:orangered 3px solid;
+#navbar {
+  margin: 10px;
+} */
+
+.jumbotron {
+  background-color: #2E2D88;
+  color: white;
 }
 
-header a{
-    color: #ffffff;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: 16px;
+.cMonster {
+  background-color: #2E2D88;
+  color: white;
 }
 
-header li{
-    float: left;
-    display: inline;
-    padding: 0 20px 0 20px;
+.navbar-right {
+  margin-right: 30px;
 }
 
-/*Positiong of links in the header */
-header #software_name{
-    float: left; 
+.navbar-right li a {
+  color: white;
+  /* justify-content: center; */
+  /* height: 20px; */
 }
 
-header #software_name h1{
-    margin: 0;
+.navbar-right li a:hover {
+  color: black;
+  background-color: #9984D3;
+  text-decoration: underline;
 }
 
-header nav{
-    float: right;
-    margin-top: 10px;
+/* .verticalDivider {
+  height: 40px;
+  margin: auto 10px;
+  border-left: 1px solid #f2f2f2;
+  border-right: 1px solid #ffffff;
+  text-align: center;
+  vertical-align: top;
+} */
+
+.page-header {
+  background-color: #2E2D88;
+  color: white;
 }
 
-/*boxes is the area for the middle links and images for Project and User setup */
-#boxes{
-    margin-top: 20px;
+.tab-content {
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+  padding: 10px;
 }
 
-#boxes .box{
-    float: left;
-    text-align: center;
-    width: 30%;
-    padding: 0px;
+/* .btn {
+  font-size: 25px;
+  padding: 5px;
+} */
+
+.button {
+  margin-top: 15px;
+  border-radius: 10%;
 }
 
-/*css for project and user images*/
-#boxes .box img{
-
-}
-ul{
-    border: 1px solid #555;
-}
-ul li{
-    display: block;
-    width: 60px;
-    color: aqua;
-    text-align: center;
-    border-bottom: 1px solid #555;
+h2 {
+  padding-bottom: 30px;
 }
 
-ul li a{
-    display: block;
-    color: #000;
-    padding: 8px 16px;
-    text-decoration: none;
+thead {
+  background-color: lightgrey;
 }
 
-li:last-child{
-    border-bottom: none;
-}
-
-/*Formatting for bottom footer and Copyright */
-footer{
+.footer {
+  background-color: #2E2D88;
+  /* border-radius: 50%; */
+  color: white;
+  padding: 20px;
+  height: 60px;
+  /* width: 87.5%; */
+  margin: auto;
+  /* padding-bottom: 0px; */
+  /* margin-top: 100px; */
+  /* .footer .navbar-fixed-bottom {
+    border-radius: 10%;
+  } */
+  .roundedElement {
+    border-radius: 10%;
+  }
+  ul.nav.nav-pills.justify-content-end {
+    border: solid 1px pink !important;
+  }
+  #userInput {
+    border: dashed 1px pink;
+  }
+  #selectRole {
+    margin-right: 10px;
+  }
+  .btn-toolbar>.btn {
+    margin-right: 20px;
+  }
+  #projectsForm {
     padding: 20px;
-    margin-top: 20px;
-    color: #ffffff;
-    background-color: orangered;
-    text-align: center;
+  }
+  div.col-sm-8 {
+    padding: 20px;
+    background-color: pink;
+  }.navbar-nav {
+
 }

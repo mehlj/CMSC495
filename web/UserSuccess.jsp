@@ -30,7 +30,7 @@ Date: 4/13/2018
   <!-- Header -->
   <div class="jumbotron">
     <h1 align='center'>User Setup</h1>
-    <h2 align='center'style="color:greenyellow;">OPERATION SUCCESS</h2>
+    <div class="alert alert-success" role="alert" align="center">Success!</div>
     <nav class="navbar navbar-right">
       <ul class="nav navbar-nav nav-pills nav-fill">
         <li><a href="index.html">Home</a></li>

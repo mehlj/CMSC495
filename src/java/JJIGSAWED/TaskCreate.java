@@ -35,6 +35,8 @@ public class TaskCreate extends HttpServlet {
         
         int projectID = Integer.parseInt(request.getParameter("ProjectID"));
         
+        System.out.println(request.getParameter("user_assignment"));
+        
         
         if (!"".equals(request.getParameter("task_name"))
          && !"".equals(request.getParameter("task_summary"))
@@ -48,8 +50,7 @@ public class TaskCreate extends HttpServlet {
             
             // convert priority to int
             int priority = Integer.parseInt(request.getParameter("task_priority"));
-            //int userID = Integer.parseInt(request.getParameter("user_assignment"));
-            int userID = 5;
+            int userID = Integer.parseInt(request.getParameter("user_assignment"));
             
             Task tsk = new Task(request.getParameter("task_name"),
                     priority,

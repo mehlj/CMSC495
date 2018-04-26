@@ -23,14 +23,13 @@ Date: 4/13/2018
   <link rel="stylesheet" href="style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  </style>
 </head>
 
 <body>
   <!-- Header -->
   <div class="jumbotron">
     <h1 align='center'>User Setup</h1>
-    <h2 align='center'style="color:red;">OPERATION FAIL</h2>
+    <div class="alert alert-danger" role="alert" align="center">Something Went Wrong, Please Try Again!</div>
     <nav class="navbar navbar-right">
       <ul class="nav navbar-nav nav-pills nav-fill">
         <li><a href="index.html">Home</a></li>
