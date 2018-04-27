@@ -4,6 +4,12 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="JJIGSAWED.Project"%>
 <% int projectID = Integer.parseInt(request.getParameter("ProjectID")); %>
+<% String taskName = request.getParameter("task_name"); %>
+<% int taskPriority = Integer.parseInt(request.getParameter("task_priority")); %>
+<% int userAssignment = Integer.parseInt(request.getParameter("user_assignment")); %>
+<% String dateCreated = request.getParameter("date_created"); %>
+<% String dateEnded = request.getParameter("date_ended"); %>
+<% String taskSummary = request.getParameter("task_summary"); %>
 <!--
 HTML written by: Dave Thatcher & Jason Willis 
 Class: CMSC 495 UMUC
@@ -55,11 +61,11 @@ Date: 4/13/2018
 
       <!-- Task Name -->
       <!-- <div class="col-sm-3"> -->
-      <form class="form-horizontal" action="${pageContext.request.contextPath}/TaskEdit?ProjectID=<%= projectID %>" method="post">
+      <form class="form-horizontal" action="${pageContext.request.contextPath}/TaskEdit?ProjectID=<%= projectID %>&OriginalTaskName=<%= taskName %>&OriginalTaskPriority=<%= taskPriority %>" method="post">
         <div class="form-group.required" style="margin-top: 10px">
           <label class="control-label mt-2 col-sm-2">*Task Name:</label>
           <div class="col-sm-4">
-            <input class="form-control" type="text" name="task_name" id="task_name" placeholder="JJIGSAWED">
+              <input class="form-control" type="text" name="task_name" id="task_name" placeholder="" value="<%= taskName %>">
           </div>
         </div>
 
@@ -69,9 +75,42 @@ Date: 4/13/2018
           <label class="control-label col-sm-2">*Priority:</label>
           <div class="col-sm-4">
             <select class="form-control" name="task_priority" id="task_priority">
+            <% 
+            if (taskPriority == 3) {
+            %>
+            <option selected value="3">Low</option>
+            <%
+            }
+            else {
+            %>
             <option value="3">Low</option>
+            <%
+            }
+            %>
+            <% 
+            if (taskPriority == 2) {
+            %>
+            <option selected value="2">Medium</option>
+            <%
+            }
+            else {
+            %>
             <option value="2">Medium</option>
+            <%
+            }
+            %>
+            <% 
+            if (taskPriority == 1) {
+            %>
+            <option selected value="1">High</option>
+            <%
+            }
+            else {
+            %>
             <option value="1">High</option>
+            <%
+            }
+            %>
           </select>
           </div>
         </div>
@@ -94,9 +133,20 @@ Date: 4/13/2018
                         while (rs.next()) 
                         {
                 %>
+                <%
+                if (userAssignment == Integer.parseInt(rs.getString("UserID")))
+                {
+                    %>
+                    <option selected value="<%= rs.getString("UserID") %>"><%= rs.getString("Name") %></option>
+                    <%
+                }
+                else
+                {
+                %>
                 <option value="<%= rs.getString("UserID") %>"><%= rs.getString("Name") %></option>
                 <%
                         }
+                    }
                 }
                 %>
           </select>
@@ -108,7 +158,7 @@ Date: 4/13/2018
         <div class="form-group.required" style="margin-top: 60px">
           <label class="control-label col-sm-2">*Start Date:</label>
           <div class="col-sm-4">
-            <input class="form-control" type="date" name="date_created" id="date_created">
+              <input class="form-control" type="date" name="date_created" id="date_created" value="<%= dateCreated %>">
           </div>
         </div>
 
@@ -117,7 +167,7 @@ Date: 4/13/2018
         <div class="form-group.required" style="margin-top: 60px">
           <label class="control-label col-sm-2">*Due Date:</label>
           <div class="col-sm-4">
-            <input class="form-control" type="date" name="date_ended" id="date_ended">
+            <input class="form-control" type="date" name="date_ended" id="date_ended" value="<%= dateEnded %>">
           </div>
         </div>
           
@@ -135,7 +185,7 @@ Date: 4/13/2018
           <div class="form-group.required" style="margin-top: 50px; margin-left:10px">
             <label class="control-label col-sm-2">*Task Summary:</label>
             <div class="col-sm-4">
-              <textarea class="form-control" name="task_summary" id="task_summary" rows="5" placeholder="Describe your task here..."></textarea>
+                <textarea class="form-control" name="task_summary" id="task_summary" rows="5" placeholder="Describe your task here..."> <%= taskSummary %></textarea>
             </div>
           </div>
         </div>
@@ -168,7 +218,7 @@ Date: 4/13/2018
 
                    for (int i = 0; i < list.size(); i++) 
                    {
-                       ResultSet rs = Task.loadTasks(list.get(i));
+                       ResultSet rs = Task.loadTasks(list.get(i)); 
 
                        // convert resultset to array
                        while (rs.next()) 
@@ -181,7 +231,7 @@ Date: 4/13/2018
                 <td><%= User.getUserName(rs.getInt("FKUserID")) %></td>
                 <td><%= projectID %></td>
                 <td>
-                    <a href="TasksUpdate.jsp?ProjectID=<%= projectID %>&task_name=<%= rs.getString("TaskName") %>&task_priority=<%= rs.getInt("TaskPriority")%>&user_assignment=<%= rs.getInt("FKUserID") %>&date_created=<%= rs.getString("TaskDateCreated")%>&date_ended=<%= rs.getString("TaskDateEnded")%>&task_summary=<%= rs.getString("TaskSummary") %>">
+                    <a href="TaskEdit?TaskName=<%= rs.getString("TaskName") %>&ProjectID=<%= projectID %>">
                     <button>Edit Task</button>
                     </a>
                 </td>

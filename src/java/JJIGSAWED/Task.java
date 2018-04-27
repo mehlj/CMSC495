@@ -272,6 +272,45 @@ public class Task {
          }
           
       } // deleteTask
+      
+     /**
+     *
+     * Obtain taskID given just task name
+     *
+     * @param taskName - name of task
+     * @param taskPriority - priority of task
+     * @return - unique ID of task
+     * @author jmehl
+    */
+    public static int getTaskID(String taskName, int taskPriority)
+    {
+        int taskID = 0;
+        
+        try 
+        {
+                Class.forName(DRIVER);
+                con = DriverManager.getConnection(CONNECT, USER, PWORD);
+
+                prepStatement = con.prepareStatement("SELECT TaskID "
+                        + "FROM CMSC495.Tasks "
+                        + "WHERE TaskName = ? AND TaskPriority = ?");
+
+                prepStatement.setString(1, taskName);
+                prepStatement.setInt(2, taskPriority);
+
+                ResultSet rs = prepStatement.executeQuery(); // perform query
+                
+                while (rs.next()) {
+                    taskID = rs.getInt(1);
+                }
+        }
+        
+        catch (ClassNotFoundException | SQLException ex)
+        {
+            System.out.println(ex);
+        }
+        return taskID;
+    }
      
 }
 

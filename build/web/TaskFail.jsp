@@ -160,6 +160,7 @@ Date: 4/13/2018
                   <th>Priority</th>
                   <th>Assigned User</th>
                   <th>Project ID</th>
+                  <th>Edit</th>
                   <th>Remove</th>
                 </tr>
                 <%
@@ -180,6 +181,11 @@ Date: 4/13/2018
                 <td><%= rs.getString("TaskPriority") %></td>
                 <td><%= User.getUserName(rs.getInt("FKUserID")) %></td>
                 <td><%= projectID %></td>
+                <td>
+                    <a href="TasksUpdate.jsp?ProjectID=<%= projectID %>&task_name=<%= rs.getString("TaskName") %>&task_priority=<%= rs.getInt("TaskPriority")%>&user_assignment=<%= rs.getInt("FKUserID") %>&date_created=<%= rs.getString("TaskDateCreated")%>&date_ended=<%= rs.getString("TaskDateEnded")%>&task_summary=<%= rs.getString("TaskSummary") %>">
+                    <button>Edit Task</button>
+                    </a>
+                </td>
                 <td>
                     <a href="TaskRemove?TaskName=<%= rs.getString("TaskName") %>&ProjectID=<%= projectID %>">
                     <button>Remove Task</button>

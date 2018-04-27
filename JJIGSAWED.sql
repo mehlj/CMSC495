@@ -40,20 +40,20 @@ CREATE UNIQUE INDEX prjIDX ON Projects(ProjectID);
 CREATE UNIQUE INDEX tskIDX ON Tasks(TaskID, FKProjectID, FKUserID);
 CREATE UNIQUE INDEX usrIDX ON Users(UserID);
 
-INSERT INTO Users (UserID, Name, Role)
-VALUES (1, "Justen Mehl", "Developer");
+INSERT INTO Users (UserID, Name, Role, Inactive)
+VALUES (1, "Justen Mehl", "Developer", 0);
 
-INSERT INTO Users (UserID, Name, Role)
-VALUES (2, "Gregory Lane", "Developer");
+INSERT INTO Users (UserID, Name, Role, Inactive)
+VALUES (2, "Gregory Lane", "Developer", 0);
 
-INSERT INTO Users (UserID, Name, Role)
-VALUES (3, "Sean Wickers", "Developer");
+INSERT INTO Users (UserID, Name, Role, Inactive)
+VALUES (3, "Sean Wickers", "Developer", 0);
 
-INSERT INTO Users (UserID, Name, Role)
-VALUES (4, "Jason Willis", "Project Manager");
+INSERT INTO Users (UserID, Name, Role, Inactive)
+VALUES (4, "Jason Willis", "Project Manager", 0);
 
-INSERT INTO Users (UserID, Name, Role)
-VALUES (5, "David Thatcher", "Team Lead");
+INSERT INTO Users (UserID, Name, Role, Inactive)
+VALUES (5, "David Thatcher", "Team Lead", 0);
 
 INSERT INTO Projects(ProjectID, ProjectName, ProjectAssignedTo, 
 ProjectDue, ProjectPriority, ProjectSummary)

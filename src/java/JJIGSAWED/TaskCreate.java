@@ -35,8 +35,6 @@ public class TaskCreate extends HttpServlet {
         
         int projectID = Integer.parseInt(request.getParameter("ProjectID"));
         
-        System.out.println(request.getParameter("user_assignment"));
-        
         
         if (!"".equals(request.getParameter("task_name"))
          && !"".equals(request.getParameter("task_summary"))
