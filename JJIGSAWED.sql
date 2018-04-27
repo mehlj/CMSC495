@@ -15,7 +15,6 @@ PRIMARY KEY(UserID)
 CREATE TABLE Projects(
 ProjectID INT NOT NULL, 
 ProjectName VARCHAR(200) NOT NULL,
-ProjectAssignedTo VARCHAR(100) NOT NULL,
 ProjectDue VARCHAR(100) NOT NULL,
 ProjectPriority INT NOT NULL,
 ProjectSummary VARCHAR(2000) NOT NULL,
@@ -57,7 +56,7 @@ VALUES (5, "David Thatcher", "Team Lead", 0);
 
 INSERT INTO Projects(ProjectID, ProjectName, ProjectAssignedTo, 
 ProjectDue, ProjectPriority, ProjectSummary)
-VALUES(1, "Test Project", "Jason Willis", "2018-05-06", 1, "Capstone project for CMSC495");
+VALUES(1, "Test Project", "2018-05-06", 1, "Capstone project for CMSC495");
 
 INSERT INTO Tasks(TaskID, FKProjectID, FKUserID, Taskname, TaskDateCreated, TaskDateEnded, 
 TaskPriority, TaskSummary)

@@ -19,7 +19,6 @@ public class Project
     
     private String projectName;
     private int priority;
-    private String projectAssignedTo;
     private int projectID;
     private String projectSummary;
     private String projectDueDate;
@@ -32,20 +31,18 @@ public class Project
      * Create Project and create record in Project table
      * @param projectName - short name of project goal
      * @param priority - integer ranking priority of project
-     * @param projectAssignedTo - project assignment to team
      * @param projectID - unique ID tracking project
      * @param projectSummary - string describing project in more detail
      * @param projectDueDate - date when project needs to be completed
      * @author glane
      */
      public Project(String projectName,
-             int priority, String projectAssignedTo,
+             int priority, 
              int projectID, String projectSummary,
              String projectDueDate) 
      {
          this.projectName = projectName;
          this.priority = priority;
-         this.projectAssignedTo = projectAssignedTo;
          this.projectID = projectID;
          this.projectSummary = projectSummary;
          this.projectDueDate = projectDueDate;
@@ -58,13 +55,12 @@ public class Project
              
          
              prepStatement = con.prepareStatement("Insert into Projects values "
-                                                + "(?,?,?,?,?,?);");
+                                                + "(?,?,?,?,?);");
              prepStatement.setInt(1, projectID);
              prepStatement.setString(2, projectName);
-             prepStatement.setString(3, projectAssignedTo);
-             prepStatement.setString(4, projectDueDate);
-             prepStatement.setInt(5, priority);
-             prepStatement.setString(6, projectSummary);
+             prepStatement.setString(3, projectDueDate);
+             prepStatement.setInt(4, priority);
+             prepStatement.setString(5, projectSummary);
          
              prepStatement.execute(); // perform insert
              
@@ -256,6 +252,45 @@ public class Project
          }
          
      } // end deleteProject();
+     
+    /**
+     *
+     * Obtain projectID given just project name and priority
+     *
+     * @param projectName - name of project
+     * @param projectPriority - priority of project
+     * @return - unique ID of project
+     * @author jmehl
+    */
+    public static int getProjectID(String projectName, int projectPriority)
+    {
+        int projectID = 0;
+        
+        try 
+        {
+                Class.forName(DRIVER);
+                con = DriverManager.getConnection(CONNECT, USER, PWORD);
+
+                prepStatement = con.prepareStatement("SELECT ProjectID "
+                        + "FROM CMSC495.Projects "
+                        + "WHERE ProjectName = ? AND ProjectPriority = ?");
+
+                prepStatement.setString(1, projectName);
+                prepStatement.setInt(2, projectPriority);
+
+                ResultSet rs = prepStatement.executeQuery(); // perform query
+                
+                while (rs.next()) {
+                    projectID = rs.getInt(1);
+                }
+        }
+        
+        catch (ClassNotFoundException | SQLException ex)
+        {
+            System.out.println(ex);
+        }
+        return projectID;
+    }
 
      
 } // end Project class

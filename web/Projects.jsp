@@ -119,12 +119,6 @@ Date: 4/13/2018
               <textarea class="form-control" id="projectSummary" name="project_summary" rows="5" placeholder="Describe your project here..."></textarea>
             </div>
           </div>
-            <div class="form-group.required" style="margin:5px">
-          <label class="control-label col-sm-2">*Project Assigned To:</label>
-          <div class="col-sm-4">
-            <input class="form-control" type="text" name='project_assigned_to' id="projectassignedto">
-          </div>
-        </div>
         </div>
       
     
@@ -148,11 +142,11 @@ Date: 4/13/2018
       <table class="table table-hover table-responsive-md table-fixed">
         <thead>
           <tr>
-            <th>Select</th>
             <th>Project Name</th>
             <th>Due Date</th>
             <th>Priority</th>
             <th>Project Summary</th>
+            <th>Select</th>
             <th>Edit</th>
             <th>Remove</th>
           </tr>
@@ -171,20 +165,25 @@ Date: 4/13/2018
                 %>
                 <tr>
                 <td><%= rs.getString("ProjectName") %></td>
-                <td><%= rs.getString("ProjectAssignedTo") %></td>
                 <td><%= rs.getString("ProjectDue") %></td>
                 <td><%= rs.getInt("ProjectPriority") %></td>
                 <td><%= rs.getString("ProjectSummary") %></td>
+                <td>
+                    <a href="ProjectSelect?ProjectName=<%= rs.getString("ProjectName") %>">
+                    <button>Select Project</button>
+                    </a>
+                </td>   
+                <td>
+                    <a href="ProjectUpdate.jsp?project_name=<%= rs.getString("ProjectName") %>&due_date=<%= rs.getString("ProjectDue") %>&project_priority=<%= rs.getInt("ProjectPriority")%>&project_summary=<%= rs.getString("ProjectSummary") %>">
+                    <button>Edit Project</button>
+                    </a>
+                </td>
                 <td>
                     <a href="ProjectRemove?ProjectName=<%= rs.getString("ProjectName") %>">
                     <button>Remove Project</button>
                     </a>
                 </td>
-                <td>
-                    <a href="ProjectSelect?ProjectName=<%= rs.getString("ProjectName") %>">
-                    <button>Select Project</button>
-                    </a>
-                </td>
+
         </tbody>
         <%
 

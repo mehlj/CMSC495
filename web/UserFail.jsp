@@ -91,9 +91,9 @@ Date: 4/13/2018
           <label class="control-label col-sm-2">User Role:</label>
           <div class="col-sm-4">
             <select class="form-control" name="user_role" id="user_role">
-            <option>Developer</option>
-            <option>Project Manager</option>
-            <option>Team Lead</option>
+            <option value="Developer">Developer</option>
+            <option value="Project Manager">Project Manager</option>
+            <option value="Team Lead">Team Lead</option>
             </select>
           </div>
         </div>

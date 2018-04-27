@@ -6,7 +6,11 @@
 package JJIGSAWED;
 
 import java.io.IOException;
-import java.util.Random;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,8 +21,16 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author jmehl
  */
-@WebServlet(name = "ProjectServlet", urlPatterns = {"/ProjectServlet"})
-public class ProjectServlet extends HttpServlet {
+@WebServlet(name = "UserEdit", urlPatterns = {"/UserEdit"})
+public class UserEdit extends HttpServlet {
+    
+    private static final String DRIVER = DBInteraction.getDBDriver();
+    private static final String CONNECT = DBInteraction.getDBConnect();
+    private static final String USER = DBInteraction.getDBUsername(); 
+    private static final String PWORD = DBInteraction.getDBPassword(); 
+    private static Statement statement;
+    private static PreparedStatement prepStatement;
+    private static Connection con;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,35 +45,37 @@ public class ProjectServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        if (!"".equals(request.getParameter("project_name"))
-         && !"".equals(request.getParameter("project_summary"))
-         && !"".equals(request.getParameter("due_date"))
-         && !"".equals(request.getParameter("project_priority"))) 
-        {
-            // generate project ID
-            Random rand = new Random();
-            int projectID = rand.nextInt(100000) + 1;
             
-            // convert priority to int
-            int priority = Integer.parseInt(request.getParameter("project_priority"));
+        String userName = request.getParameter("user_name");
+        String userRole = request.getParameter("user_role");
+
+        String originalUserName = request.getParameter("OriginalUserName");
+        String originalUserRole = request.getParameter("OriginalUserRole");
+        
+        // get task ID from name and priority
+        int userID = User.getUserID(originalUserName, originalUserRole);
+        System.out.println(userID);
             
-            Project prj = new Project(request.getParameter("project_name"),
-                    priority,
-                    projectID,
-                    request.getParameter("project_summary"),
-                    request.getParameter("due_date"));
-                    try
-                    {
-                        response.sendRedirect("ProjectsSuccess.jsp");
-                    }
-                    catch (IOException ex)
-                    {
-                        response.sendRedirect("ProjectsFail.jsp");
-                    }
-        }
-        else
-        {
-            response.sendRedirect("ProjectsFail.jsp");
+         try {
+             Class.forName(DRIVER);
+             con = DriverManager.getConnection(CONNECT, USER, PWORD);
+
+             prepStatement = con.prepareStatement("UPDATE CMSC495.Users"
+                     + " SET Name = ?, Role = ?"
+                     + " WHERE UserID = ?");
+
+             prepStatement.setString(1, userName);
+             prepStatement.setString(2, userRole);
+             prepStatement.setInt(3, userID);
+
+             prepStatement.execute(); // perform update
+
+             // redirect to success page
+             response.sendRedirect("UserSuccess.jsp");
+            } catch (ClassNotFoundException | SQLException ex) {
+                System.out.println("An exception occured");
+                System.out.println(ex);
+                response.sendRedirect("UserFail.jsp");
         }
         
     }

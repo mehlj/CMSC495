@@ -260,4 +260,43 @@ public class User {
         }
         return userName;
     }
+    
+    /**
+     *
+     * Obtain userID given user name and role
+     *
+     * @param userName - name of user
+     * @param userRole - role of user
+     * @return - unique ID of user
+     * @author jmehl
+    */
+    public static int getUserID(String userName, String userRole)
+    {
+        int userID = 0;
+        
+        try 
+        {
+                Class.forName(driver);
+                con = DriverManager.getConnection(connect, USER, PWORD);
+
+                prepStatement = con.prepareStatement("SELECT UserID "
+                        + "FROM CMSC495.Users "
+                        + "WHERE Name = ? AND Role = ?");
+
+                prepStatement.setString(1, userName);
+                prepStatement.setString(2, userRole);
+
+                ResultSet rs = prepStatement.executeQuery(); // perform query
+                
+                while (rs.next()) {
+                    userID = rs.getInt(1);
+                }
+        }
+        
+        catch (ClassNotFoundException | SQLException ex)
+        {
+            System.out.println(ex);
+        }
+        return userID;
+    }
 }

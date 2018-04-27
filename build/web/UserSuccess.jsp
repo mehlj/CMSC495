@@ -37,7 +37,6 @@ Date: 4/13/2018
         <li><a href="Projects.jsp">Projects</a></li>
         <!-- <li><a href="Tasks.html">Tasks</a></li> -->
         <li class="active"><a href="UserSetup.jsp">User Setup</a></li>
-        <li><a href="#">Sign Out</a></li>
       </ul>
     </nav>
   </div>
@@ -93,9 +92,9 @@ Date: 4/13/2018
           <label class="control-label col-sm-2">User Role:</label>
           <div class="col-sm-4">
             <select class="form-control" name="user_role" id="user_role">
-            <option>Developer</option>
-            <option>Project Manager</option>
-            <option>Team Lead</option>
+            <option value="Developer">Developer</option>
+            <option value="Project Manager">Project Manager</option>
+            <option value="Team Lead">Team Lead</option>
             </select>
           </div>
         </div>
@@ -139,6 +138,7 @@ Date: 4/13/2018
         <tr>
           <th>Name</th>
           <th>Role</th>
+          <th>Edit</th>
           <th>Remove</th>
           <th>Inactivate</th>
         </tr>
@@ -156,6 +156,11 @@ Date: 4/13/2018
             <tr>
                 <td><%= rs.getString("Name")%></td>
                 <td><%= rs.getString("Role")%></td>
+            <td>
+                    <a href="UserUpdate.jsp?user_name=<%= rs.getString("Name") %>&user_role=<%= rs.getString("Role") %>">
+                        <button>Edit User</button>
+                    </a>
+            </td>
             <td>
                     <a href="UserRemove?user_name=<%= rs.getString("name")%>">
                         <button>Remove User</button>

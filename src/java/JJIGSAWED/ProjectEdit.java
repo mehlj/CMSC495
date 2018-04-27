@@ -21,8 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author jmehl
  */
-@WebServlet(name = "TaskEdit", urlPatterns = {"/TaskEdit"})
-public class TaskEdit extends HttpServlet {
+@WebServlet(name = "ProjectEdit", urlPatterns = {"/ProjectEdit"})
+public class ProjectEdit extends HttpServlet {
     
     private static final String DRIVER = DBInteraction.getDBDriver();
     private static final String CONNECT = DBInteraction.getDBConnect();
@@ -46,46 +46,42 @@ public class TaskEdit extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
             
-        String taskName = request.getParameter("task_name");
-        String originalTaskName = request.getParameter("OriginalTaskName");
-        String taskSummary = request.getParameter("task_summary");
-        String taskDateCreated = request.getParameter("date_created");
-        String taskDateEnded = request.getParameter("date_ended");
+        String projectName = request.getParameter("project_name");
+        String projectDue = request.getParameter("due_date");
+        int projectPriority = Integer.parseInt(request.getParameter("project_priority"));
+        String projectSummary = request.getParameter("project_summary");
+        
         // convert priority to int
-        int taskPriority = Integer.parseInt(request.getParameter("task_priority"));
-        int originalTaskPriority = Integer.parseInt(request.getParameter("OriginalTaskPriority"));
-        int userID = Integer.parseInt(request.getParameter("user_assignment"));
-        int projectID = Integer.parseInt(request.getParameter("ProjectID"));
+        int originalProjectPriority = Integer.parseInt(request.getParameter("OriginalProjectPriority"));
+        String originalProjectName = request.getParameter("OriginalProjectName");
+        int projectID = 0;
         
-        
-        // get task ID from name and priority
-        int taskID = Task.getTaskID(originalTaskName, originalTaskPriority);
-        System.out.println(taskID);
+        // get project ID from name and priority
+        projectID = Project.getProjectID(originalProjectName, originalProjectPriority);
+        System.out.println(projectID);
             
          try {
              Class.forName(DRIVER);
              con = DriverManager.getConnection(CONNECT, USER, PWORD);
 
-             prepStatement = con.prepareStatement("UPDATE CMSC495.Tasks"
-                     + " SET TaskName = ?, TaskSummary = ?, TaskDateCreated = ?, TaskDateEnded = ?, TaskPriority = ?, FKUserID = ?"
-                     + " WHERE TaskID = ?");
+             prepStatement = con.prepareStatement("UPDATE CMSC495.Projects"
+                     + " SET ProjectName = ?, ProjectDue = ?, ProjectPriority = ?, ProjectSummary = ?"
+                     + " WHERE ProjectID = ?");
 
-             prepStatement.setString(1, taskName);
-             prepStatement.setString(2, taskSummary);
-             prepStatement.setString(3, taskDateCreated);
-             prepStatement.setString(4, taskDateEnded);
-             prepStatement.setInt(5, taskPriority);
-             prepStatement.setInt(6, userID);
-             prepStatement.setInt(7, taskID);
+             prepStatement.setString(1, projectName);
+             prepStatement.setString(2, projectDue);
+             prepStatement.setInt(3, projectPriority);
+             prepStatement.setString(4, projectSummary);
+             prepStatement.setInt(5, projectID);
 
              prepStatement.execute(); // perform update
 
              // redirect to success page
-             response.sendRedirect("TaskSuccess.jsp?ProjectID=" + projectID);
+             response.sendRedirect("ProjectsSuccess.jsp");
             } catch (ClassNotFoundException | SQLException ex) {
                 System.out.println("An exception occured");
                 System.out.println(ex);
-                response.sendRedirect("TaskFail.jsp?ProjectID=" + projectID);
+                response.sendRedirect("ProjectsFail.jsp");
         }
         
     }

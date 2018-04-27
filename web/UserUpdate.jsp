@@ -13,6 +13,8 @@ Date: 4/13/2018
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="JJIGSAWED.User"%>
+<% String userName = request.getParameter("user_name"); %>
+<% String userRole = request.getParameter("user_role"); %>
 <html>
 
 <head>
@@ -49,11 +51,11 @@ Date: 4/13/2018
       <!-- Default panel contents -->
       <div class="panel-heading">Create Your User Account Here:</div>
       <!-- User Name -->
-      <form class="form-horizontal" action="${pageContext.request.contextPath}/UserServlet"  method="POST">
+      <form class="form-horizontal" action="${pageContext.request.contextPath}/UserEdit?OriginalUserName=<%= userName %>&OriginalUserRole=<%= userRole %>"  method="POST">
         <div class="form-group.required" style="margin:5px">
           <label class=" control-label mt-2 col-sm-2">* User Name:</label>
           <div class="col-sm-4">
-              <input class="form-control" type="text" name="user_name" id="user_name" placeholder="JWillis">
+              <input class="form-control" type="text" name="user_name" id="user_name" placeholder="" value="<%= userName %>">
           </div>
         </div>
       
@@ -90,9 +92,42 @@ Date: 4/13/2018
           <label class="control-label col-sm-2">User Role:</label>
           <div class="col-sm-4">
             <select class="form-control" name="user_role" id="user_role">
+            <% 
+            if (userRole.equalsIgnoreCase("Developer")) {
+            %>
+            <option selected value="Developer">Developer</option>
+            <%
+            }
+            else {
+            %>
             <option value="Developer">Developer</option>
+            <%
+            }
+            %>
+            <% 
+            if (userRole.equalsIgnoreCase("Project Manager")) {
+            %>
+            <option selected value="Project Manager">Project Manager</option>
+            <%
+            }
+            else {
+            %>
             <option value="Project Manager">Project Manager</option>
+            <%
+            }
+            %>
+            <% 
+            if (userRole.equalsIgnoreCase("Team Lead")) {
+            %>
+            <option selected value="Team Lead">Team Lead</option>
+            <%
+            }
+            else {
+            %>
             <option value="Team Lead">Team Lead</option>
+            <%
+            }
+            %>
             </select>
           </div>
         </div>

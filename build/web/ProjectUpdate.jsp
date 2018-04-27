@@ -13,6 +13,11 @@ Date: 4/13/2018
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="JJIGSAWED.Project"%>
+<% String projectName = request.getParameter("project_name"); %>
+<% String dueDate = request.getParameter("due_date"); %>
+<% int projectPriority = Integer.parseInt(request.getParameter("project_priority")); %>
+<% String projectSummary = request.getParameter("project_summary"); %>
+
 <html>
 
 <head>
@@ -30,13 +35,11 @@ Date: 4/13/2018
   <!-- Header -->
   <div class="jumbotron">
     <h1 align='center'>Manage Projects</h1>
-     <div class="alert alert-success" role="alert" align="center">Success!</div>
     <nav class="navbar navbar-right">
       <ul class="nav navbar-nav nav-pills nav-fill">
         <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
         <li class="nav-item active"><a class="nav-link active" href="Projects.jsp">Projects</a></li>
         <li class="nav-item"><a class="nav-link active" href="UserSetup.jsp">UserSetup</a></li>
-        <li class="nav-item"><a class="nav-link active" href="#.html">Sign Out</a></li>
       </ul>
     </nav>
   </div>
@@ -56,11 +59,11 @@ Date: 4/13/2018
       <!-- <form> -->
       <!-- Project Name -->
       <!-- <div class="col-sm-3"> -->
-      <form class="form-horizontal" action="${pageContext.request.contextPath}/ProjectServlet" method="post">
+      <form class="form-horizontal" action="${pageContext.request.contextPath}/ProjectEdit?OriginalProjectName=<%= projectName %>&OriginalProjectPriority=<%= projectPriority %>" method="post">
         <div class="form-group.required" style="margin:5px">
           <label class="control-label mt-2 col-sm-2">*Project Name:</label>
           <div class="col-sm-4">
-            <input class="form-control" type="text" name='project_name' id="projectName" placeholder="JJIGSAWED">
+            <input class="form-control" type="text" name='project_name' id="projectName" placeholder="" value="<%= projectName %>">
           </div>
         </div>
       
@@ -72,7 +75,7 @@ Date: 4/13/2018
         <div class="form-group.required" style="margin:5px">
           <label class="control-label col-sm-2">*Due Date:</label>
           <div class="col-sm-4">
-            <input class="form-control" type="date" name='due_date' id="projectDueDate">
+            <input class="form-control" type="date" name='due_date' id="projectDueDate" value="<%= dueDate %>">
           </div>
         </div>
       
@@ -92,9 +95,42 @@ Date: 4/13/2018
           <label class="control-label col-sm-2">*Priority:</label>
           <div class="col-sm-4">
             <select class="form-control" name="project_priority" id="selectRole">
-              <option value=1>Low</option>
-              <option value=2>Medium</option>
-              <option value=3>High</option>
+<% 
+            if (projectPriority == 3) {
+            %>
+            <option selected value="3">Low</option>
+            <%
+            }
+            else {
+            %>
+            <option value="3">Low</option>
+            <%
+            }
+            %>
+            <% 
+            if (projectPriority == 2) {
+            %>
+            <option selected value="2">Medium</option>
+            <%
+            }
+            else {
+            %>
+            <option value="2">Medium</option>
+            <%
+            }
+            %>
+            <% 
+            if (projectPriority == 1) {
+            %>
+            <option selected value="1">High</option>
+            <%
+            }
+            else {
+            %>
+            <option value="1">High</option>
+            <%
+            }
+            %>
             </select>
           </div>
         </div>
@@ -117,18 +153,14 @@ Date: 4/13/2018
           <div class="form-group.required" style="margin-top:60px; margin-left:10px">
             <label class="control-label col-sm-2">*Project Summary:</label>
             <div class="col-sm-8">
-              <textarea class="form-control" id="projectSummary" name="project_summary" rows="5" placeholder="Describe your project here..."></textarea>
+              <textarea class="form-control" id="projectSummary" name="project_summary" rows="5" placeholder="Describe your project here..."> <%= projectSummary %></textarea>
             </div>
           </div>
-        </div>
-      
+        </div>  
     
       <!-- Whole Form -->
        </form>
     </div>
-  </div>
-  </div>
-  <!-- Container Div -->
   </div>
 
   <br />
@@ -173,7 +205,7 @@ Date: 4/13/2018
                     <a href="ProjectSelect?ProjectName=<%= rs.getString("ProjectName") %>">
                     <button>Select Project</button>
                     </a>
-                </td>
+                </td>   
                 <td>
                     <a href="ProjectUpdate.jsp?project_name=<%= rs.getString("ProjectName") %>&due_date=<%= rs.getString("ProjectDue") %>&project_priority=<%= rs.getInt("ProjectPriority")%>&project_summary=<%= rs.getString("ProjectSummary") %>">
                     <button>Edit Project</button>
@@ -197,8 +229,7 @@ Date: 4/13/2018
     </div>
     <!-- Close Panel Container -->
   </div>
-  <!-- Close Main Container -->
-  </div>
+
 
   <!-- Pagination -->
   <nav aria-label="Page navigation" align='center'>
