@@ -291,6 +291,32 @@ public class Project
         }
         return projectID;
     }
+    
+    public static ResultSet projectSearch(String projectName){
+        ResultSet rs = null;
+         
+         try
+         {        
+             Class.forName(DRIVER);
+             con = DriverManager.getConnection(CONNECT,USER,PWORD);
+         
+             prepStatement = con.prepareStatement("SELECT * "
+                                                + "FROM CMSC495.Projects "
+                                                + "WHERE projectName LIKE ?");
+             
+             prepStatement.setString(1, "%" + projectName + "%");
+         
+             rs = prepStatement.executeQuery();
+             
+         } 
+         catch (ClassNotFoundException | SQLException ex) 
+         {
+            System.out.println("An exception occured");
+            System.out.println(ex);
+         }
+         
+         return rs;
+    } // end projectSearch
 
      
 } // end Project class

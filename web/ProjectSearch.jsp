@@ -13,10 +13,11 @@ Date: 4/13/2018
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="JJIGSAWED.Project"%>
+<% String projectName = request.getParameter("ProjectName"); %>
 <html>
 
 <head>
-  <title>Projects Page</title>
+  <title>Projects Search</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
@@ -29,7 +30,7 @@ Date: 4/13/2018
 <body>
   <!-- Header -->
   <div class="jumbotron">
-    <h1 align='center'>Manage Projects</h1>
+    <h1 align='center'>Projects Search</h1>
     <nav class="navbar navbar-right">
       <ul class="nav navbar-nav nav-pills nav-fill">
         <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
@@ -104,7 +105,7 @@ Date: 4/13/2018
         <div class="form-group.required" style="margin-top:60px">
           <label class="control-label col-sm-2">*Search | Save:</label>
           <div class="col-sm-4">
-              <a href="ProjectSearch?ProjectName=<%= request.getParameter("ProjectName") %>" class="btn btn-info" role="button">Search</a>
+            <a href="index.html" class="btn btn-info" role="button">Search</a>
             <button type="submit" class="btn btn-success">Save</button>
           </div>
         </div>
@@ -149,16 +150,15 @@ Date: 4/13/2018
             <th>Select</th>
             <th>Edit</th>
             <th>Remove</th>
-            <th>Search</th>
           </tr>
         </thead>
         <tbody>
            <%
-                   ArrayList<Integer> list = Project.getProjectIDs();
+                   //ArrayList<Integer> list = Project.getProjectIDs();
 
-                   for (int i = 0; i < list.size(); i++) 
-                   {
-                       ResultSet rs = Project.loadProject(list.get(i));
+                   //for (int i = 0; i < list.size(); i++) 
+                   //{
+                       ResultSet rs = Project.projectSearch(projectName);
 
                        // convert resultset to array
                        while (rs.next()) 
@@ -184,14 +184,11 @@ Date: 4/13/2018
                     <button>Remove Project</button>
                     </a>
                 </td>
-                <td>
-                    <a href="ProjectSearch?ProjectName=<%= rs.getString("ProjectName") %>" class="btn btn-info" role="button">Search</a> <!-- We might have to put the search button here -->
-                </td>
 
         </tbody>
         <%
 
-                       }
+                      // }
                    }
 
                 %>
