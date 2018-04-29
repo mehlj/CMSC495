@@ -141,7 +141,7 @@ Date: 4/13/2018
         <div class="form-group.required" style="margin-top:60px">
           <label class="control-label col-sm-2">*Search | Save:</label>
           <div class="col-sm-4">
-            <button type="button" class="btn btn-info">Search</button>
+              <button type="button" class="btn btn-info" onclick="getValue()">Search</button>
             <button type="submit" class="btn btn-success">Save</button>
           </div>
         </div>
@@ -262,6 +262,18 @@ Date: 4/13/2018
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" crossorigin="anonymous"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  <script>
+      function getValue(){
+      //alert($("#projectName").val());
+      var val = $("#projectName").val();
+      val = "ProjectSearch.jsp?ProjectName=" + val;
+      //alert("ProjectSearch?ProjectName=" + val);
+      var url = val;
+      $(location).attr('href',url);
+      
+  }
+  </script>
 </body>
 
 </html>
