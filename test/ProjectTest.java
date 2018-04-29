@@ -13,8 +13,8 @@ import static org.junit.Assert.*;
 public class ProjectTest
 {
      
-    private final String driver = "com.mysql.jdbc.Driver";
-    private final String connect = "jdbc:mysql://localhost:3306/CMSC495";
+    private final String driver = DBInteraction.getDBDriver();
+    private final String connect = DBInteraction.getDBConnect();
     private static final String USER = DBInteraction.getDBUsername(); 
     private static final String PWORD = DBInteraction.getDBPassword(); 
 
@@ -39,7 +39,7 @@ public class ProjectTest
 
         // create new test record
         Project instance = new Project("Test Project 1",
-             3, "Testers", 100, "Testing modifyProjectString()",
+             3, 100, "Testing modifyProjectString()",
              "3/29/18");
         instance.modifyProjectString(colToModify, newValue, 100);
         
@@ -88,7 +88,7 @@ public class ProjectTest
 
         // create new test record
         Project instance = new Project("Test Project 2",
-             5, "Testers", 101, "Testing modifyProjectInt()",
+             5, 101, "Testing modifyProjectInt()",
              "3/29/18");
         instance.modifyProjectInt(colToModify, newValue, projectID);
         
@@ -137,7 +137,7 @@ public class ProjectTest
 
         // create new test record
         Project instance = new Project("Test Project 3",
-             5, "Testers", 103, "Testing loadProject()",
+             5, 103, "Testing loadProject()",
              "3/29/18");
         
         try 
@@ -183,7 +183,7 @@ public class ProjectTest
 
         // create new test record
         Project instance = new Project("Test Project Create Test",
-             1, "GregTest", 122, "Testing CreateProject()",
+             1, 122, "Testing CreateProject()",
              "3/29/18");
         
         try 
@@ -217,7 +217,7 @@ public class ProjectTest
           System.out.println("testDeleteProject");
           // create new test record
         Project instance = new Project("Test Project 3",
-             5, "Testers", 36, "Testing loadProject()",
+             5, 36, "Testing loadProject()",
              "3/29/18");
         String projectName = "";
         String resultValue = "";
