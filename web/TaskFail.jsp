@@ -126,7 +126,7 @@ Date: 4/13/2018
         <div class="form-group.required" style="margin-top: 110px">
           <label class="control-label col-sm-2">*Search | Save:</label>
           <div class="col-sm-4">
-            <button type="button" class="btn btn-info">Search</button>
+            <button type="button" class="btn btn-info" onclick="getValue()">Search</button>
             <button type="submit" class="btn btn-success">Save</button>
           </div>
         </div>
@@ -183,12 +183,12 @@ Date: 4/13/2018
                 <td><%= projectID %></td>
                 <td>
                     <a href="TasksUpdate.jsp?ProjectID=<%= projectID %>&task_name=<%= rs.getString("TaskName") %>&task_priority=<%= rs.getInt("TaskPriority")%>&user_assignment=<%= rs.getInt("FKUserID") %>&date_created=<%= rs.getString("TaskDateCreated")%>&date_ended=<%= rs.getString("TaskDateEnded")%>&task_summary=<%= rs.getString("TaskSummary") %>">
-                    <button>Edit Task</button>
+                    <button class="btn btn-success">Edit Task</button>
                     </a>
                 </td>
                 <td>
                     <a href="TaskRemove?TaskName=<%= rs.getString("TaskName") %>&ProjectID=<%= projectID %>">
-                    <button>Remove Task</button>
+                    <button class="btn btn-danger">Remove Task</button>
                     </a>
                 </td>
                 </tr>
@@ -228,6 +228,17 @@ Date: 4/13/2018
 
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+      function getValue(){
+      //alert($("#projectName").val());
+      var val = $("#task_name").val();
+      val = "TaskSearch.jsp?TaskName=" + val;
+      //alert("ProjectSearch?ProjectName=" + val);
+      var url = val;
+      $(location).attr('href',url);
+      
+  }
+  </script>
 </body>
 
 </html>

@@ -13,6 +13,7 @@ Date: 4/13/2018
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="JJIGSAWED.User"%>
+<% String userName = request.getParameter("UserName"); %>
 <html>
 
 <head>
@@ -28,14 +29,13 @@ Date: 4/13/2018
 <body>
   <!-- Header -->
   <div class="jumbotron">
-    <h1 align='center'>User Setup</h1>
-    <div class="alert alert-danger" role="alert" align="center">Something Went Wrong, Please Try Again!</div>
+    <h1 align='center'>User Search</h1>
     <nav class="navbar navbar-right">
       <ul class="nav navbar-nav nav-pills nav-fill">
         <li><a href="index.html">Home</a></li>
         <li><a href="Projects.jsp">Projects</a></li>
+        <!-- <li><a href="Tasks.html">Tasks</a></li> -->
         <li class="active"><a href="UserSetup.jsp">User Setup</a></li>
-        <li><a href="#">Sign Out</a></li>
       </ul>
     </nav>
   </div>
@@ -137,6 +137,7 @@ Date: 4/13/2018
         <tr>
           <th>Name</th>
           <th>Role</th>
+          <th>Edit</th>
           <th>Remove</th>
           <th>Inactivate</th>
         </tr>
@@ -145,8 +146,8 @@ Date: 4/13/2018
             <%
                 ArrayList<Integer> list = User.getUserIDs();
 
-                for (int i = 0; i < list.size(); i++) {
-                    ResultSet rs = User.getUser(list.get(i));
+               // for (int i = 0; i < list.size(); i++) {
+                    ResultSet rs = User.userSearch(userName);
 
                     // convert resultset to array
                     while (rs.next()) {
@@ -155,20 +156,25 @@ Date: 4/13/2018
                 <td><%= rs.getString("Name")%></td>
                 <td><%= rs.getString("Role")%></td>
             <td>
+                    <a href="UserUpdate.jsp?user_name=<%= rs.getString("Name") %>&user_role=<%= rs.getString("Role") %>">
+                        <button class="btn btn-success">Edit User</button>
+                    </a>
+            </td>
+            <td>
                     <a href="UserRemove?user_name=<%= rs.getString("name")%>">
                         <button class="btn btn-danger">Remove User</button>
                     </a>
-                </td>
-                <td>
+            </td>
+            <td>
                     <a href="UserInactive?user_name=<%= rs.getString("name")%>">
                         <button class="btn btn-info">Inactivate User</button>
                     </a>
-                </td>    
+            </td>    
         </tr>
       </tbody>
       <%
 
-                    }
+                   // }
                 }
 
             %>

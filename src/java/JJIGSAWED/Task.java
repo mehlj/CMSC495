@@ -311,6 +311,31 @@ public class Task {
         }
         return taskID;
     }
+    public static ResultSet taskSearch(String taskName){
+        ResultSet rs = null;
+         
+         try
+         {        
+             Class.forName(DRIVER);
+             con = DriverManager.getConnection(CONNECT,USER,PWORD);
+         
+             prepStatement = con.prepareStatement("SELECT * "
+                                                + "FROM CMSC495.Tasks "
+                                                + "WHERE TaskName LIKE ?");
+             
+             prepStatement.setString(1, "%" + taskName + "%");
+         
+             rs = prepStatement.executeQuery();
+             
+         } 
+         catch (ClassNotFoundException | SQLException ex) 
+         {
+            System.out.println("An exception occured");
+            System.out.println(ex);
+         }
+         
+         return rs;
+    } // end projectSearch
      
 }
 

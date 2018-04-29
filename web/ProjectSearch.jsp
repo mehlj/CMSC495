@@ -105,7 +105,7 @@ Date: 4/13/2018
         <div class="form-group.required" style="margin-top:60px">
           <label class="control-label col-sm-2">*Search | Save:</label>
           <div class="col-sm-4">
-            <a href="index.html" class="btn btn-info" role="button">Search</a>
+           <button class="btn btn-info"  type="button" onclick="getValue()">Search</button>
             <button type="submit" class="btn btn-success">Save</button>
           </div>
         </div>
@@ -171,17 +171,17 @@ Date: 4/13/2018
                 <td><%= rs.getString("ProjectSummary") %></td>
                 <td>
                     <a href="ProjectSelect?ProjectName=<%= rs.getString("ProjectName") %>">
-                    <button>Select Project</button>
+                    <button class="btn btn-success">Select Project</button>
                     </a>
                 </td>   
                 <td>
                     <a href="ProjectUpdate.jsp?project_name=<%= rs.getString("ProjectName") %>&due_date=<%= rs.getString("ProjectDue") %>&project_priority=<%= rs.getInt("ProjectPriority")%>&project_summary=<%= rs.getString("ProjectSummary") %>">
-                    <button>Edit Project</button>
+                    <button class="btn btn-info">Edit Project</button>
                     </a>
                 </td>
                 <td>
                     <a href="ProjectRemove?ProjectName=<%= rs.getString("ProjectName") %>">
-                    <button>Remove Project</button>
+                    <button class="btn btn-danger">Remove Project</button>
                     </a>
                 </td>
 
@@ -231,6 +231,18 @@ Date: 4/13/2018
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" crossorigin="anonymous"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  <script>
+      function getValue(){
+      //alert($("#projectName").val());
+      var val = $("#projectName").val();
+      val = "ProjectSearch.jsp?ProjectName=" + val;
+      //alert("ProjectSearch?ProjectName=" + val);
+      var url = val;
+      $(location).attr('href',url);
+      
+  }
+  </script>
 </body>
 
 </html>

@@ -299,4 +299,30 @@ public class User {
         }
         return userID;
     }
+    
+    public static ResultSet userSearch(String userName){
+        ResultSet rs = null;
+         
+         try
+         {        
+             Class.forName(driver);
+             con = DriverManager.getConnection(connect,USER,PWORD);
+         
+             prepStatement = con.prepareStatement("SELECT * "
+                                                + "FROM CMSC495.Users "
+                                                + "WHERE Name LIKE ?");
+             
+             prepStatement.setString(1, "%" + userName + "%");
+         
+             rs = prepStatement.executeQuery();
+             
+         } 
+         catch (ClassNotFoundException | SQLException ex) 
+         {
+            System.out.println("An exception occured");
+            System.out.println(ex);
+         }
+         
+         return rs;
+    } // end userSearch
 }
