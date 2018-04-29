@@ -191,17 +191,17 @@ Date: 4/13/2018
                 <td><%= rs.getString("Role")%></td>
             <td>
                     <a href="UserUpdate.jsp?user_name=<%= rs.getString("Name") %>&user_role=<%= rs.getString("Role") %>">
-                        <button>Edit User</button>
+                        <button class="btn btn-success">Edit User</button>
                     </a>
             </td>
             <td>
                     <a href="UserRemove?user_name=<%= rs.getString("name")%>">
-                        <button>Remove User</button>
+                        <button class="btn btn-danger">Remove User</button>
                     </a>
             </td>
             <td>
                     <a href="UserInactive?user_name=<%= rs.getString("name")%>">
-                        <button>Inactivate User</button>
+                        <button class="btn btn-info">Inactivate User</button>
                     </a>
             </td>    
         </tr>

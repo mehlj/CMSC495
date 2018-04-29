@@ -3,7 +3,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="JJIGSAWED.Project"%>
-<% int projectID = Integer.parseInt(request.getParameter("ProjectID")); %>
+<% String taskName = request.getParameter("TaskName"); %>
 <!--
 HTML written by: Dave Thatcher & Jason Willis 
 Class: CMSC 495 UMUC
@@ -18,7 +18,7 @@ Date: 4/13/2018
 
     
 <head>
-  <title>Tasks Page</title>
+  <title>Task Search</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -30,7 +30,7 @@ Date: 4/13/2018
 <body>
   <!-- <header> -->
   <div class="jumbotron">
-    <h1 align='center'>Manage Tasks</h1>
+    <h1 align='center'>Task Search</h1>
     <nav class="navbar navbar-right">
       <ul class="nav navbar-nav nav-pills nav-fill">
         <li><a href="index.html">Home</a></li>
@@ -55,7 +55,7 @@ Date: 4/13/2018
 
       <!-- Task Name -->
       <!-- <div class="col-sm-3"> -->
-      <form class="form-horizontal" action="${pageContext.request.contextPath}/TaskEdit?ProjectID=<%= projectID %>" method="post">
+      <form class="form-horizontal" action="${pageContext.request.contextPath}/TaskEdit?ProjectID=" method="post">
         <div class="form-group.required" style="margin-top: 10px">
           <label class="control-label mt-2 col-sm-2">*Task Name:</label>
           <div class="col-sm-4">
@@ -125,8 +125,8 @@ Date: 4/13/2018
         <div class="form-group.required" style="margin-top: 110px">
           <label class="control-label col-sm-2">*Search | Save:</label>
           <div class="col-sm-4">
-            <button type="button" class="btn btn-info" onclick="getValue()">Search</button>
-            <button type="submit" class="btn btn-success">Save</button>
+              <button type="button" class="btn btn-info" onclick="getValue()">Search</button>
+            <button type="button" class="btn btn-success" onclick="backToProjects()">Back To Projects</button>
           </div>
         </div>
 
@@ -159,16 +159,15 @@ Date: 4/13/2018
                   <th>Priority</th>
                   <th>Assigned User</th>
                   <th>Project ID</th>
-                  <th>Edit</th>
-                  <th>Remove</th>
+                  
                 </tr>
                 <%
 
-                   ArrayList<Integer> list = Task.getTaskIDs(projectID);
+                   //ArrayList<Integer> list = Task.getTaskIDs(projectID);
 
-                   for (int i = 0; i < list.size(); i++) 
-                   {
-                       ResultSet rs = Task.loadTasks(list.get(i));
+                   //for (int i = 0; i < list.size(); i++) 
+                   //{
+                       ResultSet rs = Task.taskSearch(taskName);
 
                        // convert resultset to array
                        while (rs.next()) 
@@ -179,21 +178,11 @@ Date: 4/13/2018
                 <td><%= rs.getString("TaskSummary") %></td>
                 <td><%= rs.getString("TaskPriority") %></td>
                 <td><%= User.getUserName(rs.getInt("FKUserID")) %></td>
-                <td><%= projectID %></td>
-                <td>
-                    <a href="TasksUpdate.jsp?ProjectID=<%= projectID %>&task_name=<%= rs.getString("TaskName") %>&task_priority=<%= rs.getInt("TaskPriority")%>&user_assignment=<%= rs.getInt("FKUserID") %>&date_created=<%= rs.getString("TaskDateCreated")%>&date_ended=<%= rs.getString("TaskDateEnded")%>&task_summary=<%= rs.getString("TaskSummary") %>">
-                    <button class="btn btn-success">Edit Task</button>
-                    </a>
-                </td>
-                <td>
-                    <a href="TaskRemove?TaskName=<%= rs.getString("TaskName") %>&ProjectID=<%= projectID %>">
-                    <button class="btn btn-danger">Remove Task</button>
-                    </a>
-                </td>
+                <td><%= rs.getString("FKProjectID") %></td>
                 </tr>
                 <%
 
-                       }
+                      // }
                    }
 
                 %>
@@ -236,6 +225,9 @@ Date: 4/13/2018
       var url = val;
       $(location).attr('href',url);
       
+  }
+  function backToProjects(){
+      $(location).attr('href',"Projects.jsp");
   }
   </script>
 </body>

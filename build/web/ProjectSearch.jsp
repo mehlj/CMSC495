@@ -13,10 +13,11 @@ Date: 4/13/2018
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="JJIGSAWED.Project"%>
+<% String projectName = request.getParameter("ProjectName"); %>
 <html>
 
 <head>
-  <title>Projects Page</title>
+  <title>Projects Search</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
@@ -29,8 +30,7 @@ Date: 4/13/2018
 <body>
   <!-- Header -->
   <div class="jumbotron">
-    <h1 align='center'>Manage Projects</h1>
-     <div class="alert alert-success" role="alert" align="center">Success!</div>
+    <h1 align='center'>Projects Search</h1>
     <nav class="navbar navbar-right">
       <ul class="nav navbar-nav nav-pills nav-fill">
         <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
@@ -105,7 +105,7 @@ Date: 4/13/2018
         <div class="form-group.required" style="margin-top:60px">
           <label class="control-label col-sm-2">*Search | Save:</label>
           <div class="col-sm-4">
-            <button class="btn btn-info"  type="button" onclick="getValue()">Search</button>
+           <button class="btn btn-info"  type="button" onclick="getValue()">Search</button>
             <button type="submit" class="btn btn-success">Save</button>
           </div>
         </div>
@@ -154,11 +154,11 @@ Date: 4/13/2018
         </thead>
         <tbody>
            <%
-                   ArrayList<Integer> list = Project.getProjectIDs();
+                   //ArrayList<Integer> list = Project.getProjectIDs();
 
-                   for (int i = 0; i < list.size(); i++) 
-                   {
-                       ResultSet rs = Project.loadProject(list.get(i));
+                   //for (int i = 0; i < list.size(); i++) 
+                   //{
+                       ResultSet rs = Project.projectSearch(projectName);
 
                        // convert resultset to array
                        while (rs.next()) 
@@ -171,9 +171,9 @@ Date: 4/13/2018
                 <td><%= rs.getString("ProjectSummary") %></td>
                 <td>
                     <a href="ProjectSelect?ProjectName=<%= rs.getString("ProjectName") %>">
-                    <button class="btn-success">Select Project</button>
+                    <button class="btn btn-success">Select Project</button>
                     </a>
-                </td>
+                </td>   
                 <td>
                     <a href="ProjectUpdate.jsp?project_name=<%= rs.getString("ProjectName") %>&due_date=<%= rs.getString("ProjectDue") %>&project_priority=<%= rs.getInt("ProjectPriority")%>&project_summary=<%= rs.getString("ProjectSummary") %>">
                     <button class="btn btn-info">Edit Project</button>
@@ -188,7 +188,7 @@ Date: 4/13/2018
         </tbody>
         <%
 
-                       }
+                      // }
                    }
 
                 %>
@@ -231,6 +231,18 @@ Date: 4/13/2018
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" crossorigin="anonymous"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  <script>
+      function getValue(){
+      //alert($("#projectName").val());
+      var val = $("#projectName").val();
+      val = "ProjectSearch.jsp?ProjectName=" + val;
+      //alert("ProjectSearch?ProjectName=" + val);
+      var url = val;
+      $(location).attr('href',url);
+      
+  }
+  </script>
 </body>
 
 </html>
