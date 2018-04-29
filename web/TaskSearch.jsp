@@ -189,7 +189,7 @@ Date: 4/13/2018
         </table>
   </div>
 
-  <!-- Pagination -->
+  <!-- Pagination 
     <ul class="pagination">
       <li>
         <a href="#" aria-label="Previous">
@@ -206,7 +206,7 @@ Date: 4/13/2018
         <span aria-hidden="true">&raquo;</span>
       </a>
       </li>
-    </ul>
+    </ul>-->
 
 
   <!-- Footer -->

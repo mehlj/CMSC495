@@ -232,12 +232,12 @@ Date: 4/13/2018
                 <td><%= projectID %></td>
                 <td>
                     <a href="TaskEdit?TaskName=<%= rs.getString("TaskName") %>&ProjectID=<%= projectID %>">
-                    <button>Edit Task</button>
+                    <button class="btn btn-info">Edit Task</button>
                     </a>
                 </td>
                 <td>
                     <a href="TaskRemove?TaskName=<%= rs.getString("TaskName") %>&ProjectID=<%= projectID %>">
-                    <button>Remove Task</button>
+                    <button class="btn btn-danger">Remove Task</button>
                     </a>
                 </td>
                 </tr>
@@ -250,7 +250,7 @@ Date: 4/13/2018
         </table>
   </div>
 
-  <!-- Pagination -->
+  <!-- Pagination 
     <ul class="pagination">
       <li>
         <a href="#" aria-label="Previous">
@@ -267,7 +267,7 @@ Date: 4/13/2018
         <span aria-hidden="true">&raquo;</span>
       </a>
       </li>
-    </ul>
+    </ul>-->
 
 
   <!-- Footer -->

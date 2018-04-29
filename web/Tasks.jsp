@@ -55,7 +55,7 @@ Date: 4/13/2018
 
       <!-- Task Name -->
       <!-- <div class="col-sm-3"> -->
-      <form class="form-horizontal" action="${pageContext.request.contextPath}/TaskEdit?ProjectID=<%= projectID %>" method="post">
+      <form class="form-horizontal" action="${pageContext.request.contextPath}/TaskCreate?ProjectID=<%= projectID %>" method="post">
         <div class="form-group.required" style="margin-top: 10px">
           <label class="control-label mt-2 col-sm-2">*Task Name:</label>
           <div class="col-sm-4">
@@ -200,7 +200,7 @@ Date: 4/13/2018
         </table>
   </div>
 
-  <!-- Pagination -->
+  <!-- Pagination 
     <ul class="pagination">
       <li>
         <a href="#" aria-label="Previous">
@@ -217,7 +217,7 @@ Date: 4/13/2018
         <span aria-hidden="true">&raquo;</span>
       </a>
       </li>
-    </ul>
+    </ul>-->
 
 
   <!-- Footer -->
