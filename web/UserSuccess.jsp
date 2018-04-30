@@ -182,7 +182,7 @@ Date: 4/13/2018
     </table>
   </div>
 
-  <!-- Pagination -->
+  <!-- Pagination 
   <nav aria-label="Page navigation" align='center'>
     <ul class="pagination">
       <li>
@@ -201,7 +201,7 @@ Date: 4/13/2018
       </a>
       </li>
     </ul>
-  </nav>
+  </nav>-->
 
 
 
