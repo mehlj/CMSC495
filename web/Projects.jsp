@@ -35,7 +35,7 @@ Date: 4/13/2018
         <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
         <li class="nav-item active"><a class="nav-link active" href="Projects.jsp">Projects</a></li>
         <li class="nav-item"><a class="nav-link active" href="UserSetup.jsp">UserSetup</a></li>
-        <li class="nav-item"><a class="nav-link active" href="#.html">Sign Out</a></li>
+<!--        <li class="nav-item"><a class="nav-link active" href="#.html">Sign Out</a></li>-->
       </ul>
     </nav>
   </div>

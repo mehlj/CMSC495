@@ -35,7 +35,7 @@ Date: 4/13/2018
         <li><a href="index.html">Home</a></li>
         <li><a href="Projects.jsp">Projects</a></li>
         <li class="active"><a href="UserSetup.jsp">User Setup</a></li>
-        <li><a href="#">Sign Out</a></li>
+<!--        <li><a href="#">Sign Out</a></li>-->
       </ul>
     </nav>
   </div>
