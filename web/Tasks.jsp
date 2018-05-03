@@ -36,7 +36,7 @@ Date: 4/13/2018
         <li><a href="index.html">Home</a></li>
         <li><a href="Projects.jsp">Projects</a></li>
         <li><a href="UserSetup.jsp">User Setup</a></li>
-        <li><a href="#">Sign Out</a></li>
+<!--        <li><a href="#">Sign Out</a></li>-->
       </ul>
     </nav>
   </div>
@@ -200,7 +200,7 @@ Date: 4/13/2018
         </table>
   </div>
 
-  <!-- Pagination 
+  <!-- Pagination -->
     <ul class="pagination">
       <li>
         <a href="#" aria-label="Previous">
@@ -217,7 +217,7 @@ Date: 4/13/2018
         <span aria-hidden="true">&raquo;</span>
       </a>
       </li>
-    </ul>-->
+    </ul>
 
 
   <!-- Footer -->

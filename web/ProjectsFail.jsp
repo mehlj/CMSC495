@@ -36,7 +36,7 @@ Date: 4/13/2018
         <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
         <li class="nav-item active"><a class="nav-link active" href="Projects.jsp">Projects</a></li>
         <li class="nav-item"><a class="nav-link active" href="UserSetup.jsp">UserSetup</a></li>
-        <li class="nav-item"><a class="nav-link active" href="#.html">Sign Out</a></li>
+<!--        <li class="nav-item"><a class="nav-link active" href="#.html">Sign Out</a></li>-->
       </ul>
     </nav>
   </div>
@@ -200,7 +200,7 @@ Date: 4/13/2018
   <!-- Close Main Container -->
   </div>
 
-  <!-- Pagination 
+  <!-- Pagination -->
   <nav aria-label="Page navigation" align='center'>
     <ul class="pagination">
       <li>
@@ -219,7 +219,7 @@ Date: 4/13/2018
       </a>
       </li>
     </ul>
-  </nav>-->
+  </nav>
 
 
   <!-- Footer -->
